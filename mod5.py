@@ -30,6 +30,7 @@ class Mod5:
             return self
         return self * self.raised_to_exponent(exponent - 1)
 
+
 if __name__ == "__main__":
     import commutative_ring
     from single_poly import SingleVarPoly
@@ -58,7 +59,7 @@ if __name__ == "__main__":
         add = lambda a, b: a + b
         additive_inverse = lambda a: -a
         multiply_by_constant = lambda a, b: a * b
-        power = lambda m, exp: m ** exp
+        power = lambda m, exp: m**exp
         value_type = Mod5
 
         zero = Mod5(0)

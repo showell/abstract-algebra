@@ -19,6 +19,9 @@ class NumberList:
     def __neg__(self):
         return NumberList.negate(self)
 
+    def __str__(self):
+        return str(self.lst)
+
     def simplify(self):
         self.lst = NumberList.simplify_list(self.lst)
 
