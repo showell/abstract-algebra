@@ -39,7 +39,7 @@ if __name__ == "__main__":
     test(samples, f, g, int, NumberList)
 
     # NumberList can compute int in a more interesting way
-    samples = [-732, 42, 13, 9, 4567, 14]
+    samples = [-732, 42, 13, 9, 4567, 142340862349551239912346999234654190]
 
     def get_digits(n):
         if n < 0:
@@ -47,6 +47,8 @@ if __name__ == "__main__":
         if n == 0:
             return []
         return [n % 10] + get_digits(n // 10)
+
+    assert get_digits(1234) == [4, 3, 2, 1]
 
     def number_from_digit_list(lst):
         return sum(c * 10**i for i, c in enumerate(lst))
