@@ -1,6 +1,7 @@
 from mod5 import Mod5
 from single_poly import SingleVarPoly
 
+
 class Mod5Math:
     add = lambda a, b: a + b
     additive_inverse = lambda a: -a
