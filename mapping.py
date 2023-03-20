@@ -1,5 +1,4 @@
 def verify_homomorphism(samples, f, g, type1, type2):
-    # print(f"We can use {type2} to compute {type1}")
     for a in samples:
         assert type(a) == type1
         assert type(f(a)) == type2
@@ -12,6 +11,12 @@ def verify_homomorphism(samples, f, g, type1, type2):
         for b in samples:
             assert g(f(a) + f(b)) == g(f(a + b))
             assert g(f(a) * f(b)) == g(f(a * b))
+
+
+def verify_isomorphism(*, samples_a, type_a, samples_b, type_b, a_to_b, b_to_a):
+    verify_homomorphism(samples_a, a_to_b, b_to_a, type_a, type_b)
+    verify_homomorphism(samples_b, b_to_a, a_to_b, type_b, type_a)
+
 
 if __name__ == "__main__":
     from fractions import Fraction
@@ -100,14 +105,29 @@ if __name__ == "__main__":
         verify_homomorphism(samples, f, g, int, NumberList)
 
     @run_test
-    def NumberList_can_compute_integer_polynomials():
-        samples = [
+    def NumberList_and_IntegerPoly_are_isomorphic():
+        samples_a = [
             IntegerPoly.from_list([0, 1, 3]),
             IntegerPoly.from_list([-47]),
             IntegerPoly.from_list([43, 0, 0, 0, 0, 27]),
         ]
+        type_a = SingleVarPoly
 
-        f = lambda ip: NumberList(ip.lst)
-        g = lambda nl: IntegerPoly.from_list(nl.lst)
+        samples_b = [
+            NumberList([43, 97, 2]),
+            NumberList([0, 123497862373]),
+            NumberList([5, -37, -38]),
+        ]
+        type_b = NumberList
 
-        verify_homomorphism(samples, f, g, SingleVarPoly, NumberList)
+        a_to_b = lambda ip: NumberList(ip.lst)
+        b_to_a = lambda nl: IntegerPoly.from_list(nl.lst)
+
+        verify_isomorphism(
+            samples_a=samples_a,
+            type_a=type_a,
+            samples_b=samples_b,
+            type_b=type_b,
+            a_to_b=a_to_b,
+            b_to_a=b_to_a,
+        )
