@@ -1,3 +1,4 @@
+from lib.type import enhanced_type
 from lib.type_enforcers import (
     enforce_list_types,
     enforce_math_protocol,
@@ -7,7 +8,6 @@ from lib.type_enforcers import (
 
 def arr_get(lst, i, zero):
     return lst[i] if i < len(lst) else zero
-
 
 class SingleVarPoly:
     def __init__(self, lst, math, var_name):
@@ -59,6 +59,7 @@ class SingleVarPoly:
     def enforce_partner_type(self, other):
         assert type(other) == SingleVarPoly
         assert type(other.math) == type(self.math)
+        assert enhanced_type(self) == enhanced_type(other)
         assert self.var_name == other.var_name
 
     def eval(self, x):

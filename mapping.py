@@ -1,5 +1,4 @@
-def enhanced_type(obj):
-    return getattr(obj, "enhanced_type", None) or type(obj)
+from lib.type import enhanced_type
 
 def verify_homomorphism(samples, f, g, type1, type2):
     for a in samples:
