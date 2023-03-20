@@ -218,70 +218,81 @@ def PolyPoly(lst):
 
 if __name__ == "__main__":
     import commutative_ring
+    from test_helpers import assert_str, run_test
 
-    def assert_str(p, expected_str):
-        if str(p) != expected_str:
-            raise AssertionError(f"got {p} when expecting {expected_str}")
+    @run_test
+    def check_IntegerPoly_basics():
+        assert IntegerPoly([1, 0, 2]) + IntegerPoly([2, 4, 7, 8]) == IntegerPoly(
+            [3, 4, 9, 8]
+        )
+        assert 201 + 8742 == 8943
 
-    assert IntegerPoly([1, 0, 2]) + IntegerPoly([2, 4, 7, 8]) == IntegerPoly(
-        [3, 4, 9, 8]
-    )
-    assert 201 + 8742 == 8943
+        assert IntegerPoly([1, 2]) * IntegerPoly([1, 3]) == IntegerPoly([1, 5, 6])
+        assert 21 * 31 == 651
 
-    assert IntegerPoly([1, 2]) * IntegerPoly([1, 3]) == IntegerPoly([1, 5, 6])
-    assert 21 * 31 == 651
+        assert IntegerPoly([7, 8]) * IntegerPoly([1, 6]) == IntegerPoly([7, 50, 48])
+        assert 87 * 61 == 48 * 100 + 50 * 10 + 7
 
-    assert IntegerPoly([7, 8]) * IntegerPoly([1, 6]) == IntegerPoly([7, 50, 48])
-    assert 87 * 61 == 48 * 100 + 50 * 10 + 7
+    @run_test
+    def check_IntegerPoly_is_ring():
+        samples = [
+            IntegerPoly([]),
+            IntegerPoly([42, 39, 2]),
+            IntegerPoly([-8, 0, 0, 0, 5]),
+            IntegerPoly([103, 8256523499]),
+        ]
 
-    samples = [
-        IntegerPoly([]),
-        IntegerPoly([42, 39, 2]),
-        IntegerPoly([-8, 0, 0, 0, 5]),
-        IntegerPoly([103, 8256523499]),
-    ]
+        zero, one, x = SingleVarPoly.base_values(IntegerMath, "x")
+        commutative_ring.test(samples, zero=zero, one=one)
 
     zero, one, x = SingleVarPoly.base_values(IntegerMath, "x")
-    commutative_ring.test(samples, zero=zero, one=one)
-
     two = SingleVarPoly.constant(2, IntegerMath, "x")
     three = two + one
 
-    assert_str(zero, "0")
-    assert_str(one, "1")
-    assert_str(two, "2")
-    assert_str(three, "3")
-    assert_str(x, "x")
-    assert_str(IntegerPoly([1, 2, 3, 4]), "(4)*x**3+(3)*x**2+(2)*x+1")
+    @run_test
+    def check_SingleVarPoly_basics():
+        assert_str(zero, "0")
+        assert_str(one, "1")
+        assert_str(two, "2")
+        assert_str(three, "3")
+        assert_str(x, "x")
+        assert_str(IntegerPoly([1, 2, 3, 4]), "(4)*x**3+(3)*x**2+(2)*x+1")
 
     p = (x + one) * (x + three) * (x + one) + two
-    assert_str(p, "x**3+(5)*x**2+(7)*x+5")
-
-    assert p.eval(10) == 1575
-    assert p.eval(100) == 1050705
-
     q = p.raised_to_exponent(3)
-    assert_str(
-        q,
-        "x**9+(15)*x**8+(96)*x**7+(350)*x**6+(822)*x**5+(1320)*x**4+(1468)*x**3+(1110)*x**2+(525)*x+125",
-    )
 
-    assert PolyPoly([one, two]) + PolyPoly([two]) == PolyPoly([three, two])
-    assert PolyPoly([one, one]) * PolyPoly([one, one]) == PolyPoly([one, two, one])
+    @run_test
+    def check_bigger_polynomials():
+        assert_str(p, "x**3+(5)*x**2+(7)*x+5")
 
-    pp = PolyPoly([one, two, x])
-    assert_str(pp, "(x)*p**2+(2)*p+1")
-    assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
-    assert_str(pp.eval(x + one), "x**3+(2)*x**2+(3)*x+3")
-    assert_str(pp.eval(x * x * x + three), "x**7+(6)*x**4+(2)*x**3+(9)*x+7")
+        assert p.eval(10) == 1575
+        assert p.eval(100) == 1050705
 
-    samples = [
-        PolyPoly([one, two, three]),
-        PolyPoly([p, q, x, p, q, x]),
-        PolyPoly([x + one, x + two, p + three]),
-    ]
+        assert_str(
+            q,
+            "x**9+(15)*x**8+(96)*x**7+(350)*x**6+(822)*x**5+(1320)*x**4+(1468)*x**3+(1110)*x**2+(525)*x+125",
+        )
 
-    pp_zero = PolyPoly([])
-    pp_one = PolyPoly([one])
+    @run_test
+    def check_PolyPoly_basics():
+        assert PolyPoly([one, two]) + PolyPoly([two]) == PolyPoly([three, two])
+        assert PolyPoly([one, one]) * PolyPoly([one, one]) == PolyPoly([one, two, one])
 
-    commutative_ring.test(samples, zero=pp_zero, one=pp_one)
+        pp = PolyPoly([one, two, x])
+        assert_str(pp, "(x)*p**2+(2)*p+1")
+        assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
+        assert_str(pp.eval(x + one), "x**3+(2)*x**2+(3)*x+3")
+        assert_str(pp.eval(x * x * x + three), "x**7+(6)*x**4+(2)*x**3+(9)*x+7")
+
+    @run_test
+    def check_PolyPoly_is_ring():
+        samples = [
+            PolyPoly([one, two, three]),
+            PolyPoly([p, q, x, p, q, x]),
+            PolyPoly([x + one, x + two, p + three]),
+        ]
+
+        pp_zero = PolyPoly([])
+        pp_one = PolyPoly([one])
+
+        commutative_ring.test(samples, zero=pp_zero, one=pp_one)
