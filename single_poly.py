@@ -1,4 +1,4 @@
-from type_enforcers import (
+from lib.type_enforcers import (
     enforce_list_types,
     enforce_math_protocol,
     enforce_type,
@@ -193,7 +193,7 @@ class PolyPoly:
 
 if __name__ == "__main__":
     import commutative_ring
-    from test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_str, run_test
 
     IP = IntegerPoly.from_list
     PP = PolyPoly.from_list
