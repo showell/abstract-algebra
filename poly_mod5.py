@@ -11,6 +11,9 @@ class Mod5Math:
 
     zero = Mod5(0)
     one = Mod5(1)
+    two = Mod5(2)
+    three = Mod5(3)
+    four = Mod5(4)
 
 
 class Mod5Poly:
@@ -33,9 +36,9 @@ if __name__ == "__main__":
 
     zero = Mod5Math.zero
     one = Mod5Math.one
-    two = Mod5(2)
-    three = Mod5(3)
-    four = Mod5(4)
+    two = Mod5Math.two
+    three = Mod5Math.three
+    four = Mod5Math.four
 
     p_zero = Mod5Poly.zero
     p_one = Mod5Poly.one
