@@ -66,17 +66,13 @@ class NumberList:
         self.bnl = BasicNumberList(lst)
 
     def __add__(self, other):
-        bnl_1 = self.bnl
-        bnl_2 = other.bnl
-        return NumberList(BasicNumberList.add(bnl_1, bnl_2).lst)
+        return NumberList(BasicNumberList.add(self.bnl, other.bnl).lst)
 
     def __eq__(self, other):
         return BasicNumberList.equal(self.bnl, other.bnl)
 
     def __mul__(self, other):
-        bnl_1 = self.bnl
-        bnl_2 = other.bnl
-        return NumberList(BasicNumberList.mul(bnl_1, bnl_2).lst)
+        return NumberList(BasicNumberList.mul(self.bnl, other.bnl).lst)
 
     def __neg__(self):
         return NumberList(BasicNumberList.negate(self.bnl).lst)
