@@ -41,7 +41,6 @@ if __name__ == "__main__":
         samples = [-7, 42, 13, 9, 4567, 14]
         verify_axioms(samples, zero=0, one=1)
 
-
     @run_test
     def check_fractions_are_ring():
         samples = [Fraction(1, 3), Fraction(-2, 7), Fraction(43, 13)]
