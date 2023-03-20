@@ -32,12 +32,9 @@ class Mod5:
 
 
 if __name__ == "__main__":
-    import commutative_ring
+    from commutative_ring import verify_axioms
     from single_poly import SingleVarPoly
-
-    def assert_str(p, expected_str):
-        if str(p) != expected_str:
-            raise AssertionError(f"got {p} when expecting {expected_str}")
+    from lib.test_helpers import assert_str
 
     zero = Mod5(0)
     one = Mod5(1)
@@ -53,7 +50,7 @@ if __name__ == "__main__":
         four,
     ]
 
-    commutative_ring.test(samples, zero=zero, one=one)
+    verify_axioms(samples, zero=zero, one=one)
 
     class Mod5Math:
         add = lambda a, b: a + b
@@ -86,4 +83,4 @@ if __name__ == "__main__":
         (p_x * p_two) + p_one,
         (p_x + p_three).raised_to_exponent(15),
     ]
-    commutative_ring.test(poly_samples, zero=p_zero, one=p_one)
+    verify_axioms(poly_samples, zero=p_zero, one=p_one)

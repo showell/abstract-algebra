@@ -192,7 +192,7 @@ class PolyPoly:
 
 
 if __name__ == "__main__":
-    import commutative_ring
+    from commutative_ring import verify_axioms
     from lib.test_helpers import assert_str, run_test
 
     IP = IntegerPoly.from_list
@@ -218,7 +218,7 @@ if __name__ == "__main__":
             IP([103, 8256523499]),
         ]
 
-        commutative_ring.test(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
+        verify_axioms(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
 
     zero = IntegerPoly.zero
     one = IntegerPoly.one
@@ -270,4 +270,4 @@ if __name__ == "__main__":
             PP([x + one, x + two, p + three]),
         ]
 
-        commutative_ring.test(samples, zero=PolyPoly.zero, one=PolyPoly.one)
+        verify_axioms(samples, zero=PolyPoly.zero, one=PolyPoly.one)

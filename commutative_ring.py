@@ -4,7 +4,7 @@ a multiplicative identity element (which we call "one").
 """
 
 
-def test(samples, *, zero, one):
+def verify_axioms(samples, *, zero, one):
     assert zero * zero == zero
     assert zero * one == zero
     assert one * zero == zero
@@ -33,10 +33,16 @@ def test(samples, *, zero, one):
 
 
 if __name__ == "__main__":
-    samples = [-7, 42, 13, 9, 4567, 14]
-    test(samples, zero=0, one=1)
-
     from fractions import Fraction
+    from lib.test_helpers import run_test
 
-    samples = [Fraction(1, 3), Fraction(-2, 7), Fraction(43, 13)]
-    test(samples, zero=Fraction(0), one=Fraction(1))
+    @run_test
+    def check_integers_are_ring():
+        samples = [-7, 42, 13, 9, 4567, 14]
+        verify_axioms(samples, zero=0, one=1)
+
+
+    @run_test
+    def check_fractions_are_ring():
+        samples = [Fraction(1, 3), Fraction(-2, 7), Fraction(43, 13)]
+        verify_axioms(samples, zero=Fraction(0), one=Fraction(1))

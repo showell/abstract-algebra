@@ -66,6 +66,8 @@ class NumberList:
 
 
 if __name__ == "__main__":
+    from commutative_ring import verify_axioms
+
     assert NumberList([1, 0, 2]) + NumberList([2, 4, 7, 8]) == NumberList([3, 4, 9, 8])
     assert 201 + 8742 == 8943
 
@@ -75,8 +77,6 @@ if __name__ == "__main__":
     assert NumberList([7, 8]) * NumberList([1, 6]) == NumberList([7, 50, 48])
     assert 87 * 61 == 48 * 100 + 50 * 10 + 7
 
-    import commutative_ring
-
     samples = [
         NumberList([]),
         NumberList([42, 39, 2]),
@@ -85,4 +85,4 @@ if __name__ == "__main__":
     ]
     zero = NumberList([])
     one = NumberList([1])
-    commutative_ring.test(samples, zero=zero, one=one)
+    verify_axioms(samples, zero=zero, one=one)
