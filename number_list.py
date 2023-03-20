@@ -115,4 +115,4 @@ if __name__ == "__main__":
     @run_test
     def exponentiation():
         x = NumberList([5, 7, -21])
-        assert_equal(x ** 3, x * x * x)
+        assert_equal(x**3, x * x * x)
