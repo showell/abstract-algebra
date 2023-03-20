@@ -14,6 +14,7 @@ class SingleVarPoly:
         enforce_math_protocol(math)
         enforce_list_types(lst, math.value_type)
         enforce_type(var_name, str)
+        self.enhanced_type = (SingleVarPoly, math.value_type)
         self.lst = lst
         self.math = math
         self.var_name = var_name

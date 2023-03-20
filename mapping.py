@@ -1,8 +1,11 @@
+def enhanced_type(obj):
+    return getattr(obj, "enhanced_type", None) or type(obj)
+
 def verify_homomorphism(samples, f, g, type1, type2):
     for a in samples:
-        assert type(a) == type1
-        assert type(f(a)) == type2
-        assert type(g(f(a))) == type1
+        assert enhanced_type(a) == type1
+        assert enhanced_type(f(a)) == type2
+        assert enhanced_type(g(f(a))) == type1
         assert g(f(a)) == a
 
         for exp in range(8):
@@ -111,7 +114,7 @@ if __name__ == "__main__":
             IntegerPoly.from_list([-47]),
             IntegerPoly.from_list([43, 0, 0, 0, 0, 27]),
         ]
-        type_a = SingleVarPoly
+        type_a = (SingleVarPoly, int)
 
         samples_b = [
             NumberList([43, 97, 2]),
