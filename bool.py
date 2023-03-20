@@ -7,6 +7,7 @@ performs simple boolean logic without NOT (i.e. negation) forms
 only a semiring. (Note that rings require an additive inverse.)
 """
 
+
 class Bool:
     def __init__(self, b):
         assert b in [False, True]
@@ -23,6 +24,7 @@ class Bool:
 
     def __str__(self):
         return str(self.b)
+
 
 def verify_semiring(samples, *, zero, one):
     # compare this to verify_axioms in commutative_ring.py

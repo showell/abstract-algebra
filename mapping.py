@@ -13,6 +13,7 @@ def verify_homomorphism(samples, f, g, type1, type2):
 
 if __name__ == "__main__":
     from fractions import Fraction
+    from bool import Bool
     from mod5 import Mod5
     from number_list import NumberList
     from lib.test_helpers import run_test
@@ -42,6 +43,36 @@ if __name__ == "__main__":
         g = lambda n: Mod5(n % 5)
 
         verify_homomorphism(samples, f, g, Mod5, int)
+
+    @run_test
+    def ints_can_compute_simple_bool_logic():
+        """
+        Note that our Bool class is very limited, and it does
+        not have any concept of negation.  However, it has
+        addition (OR) and multiplication (AND) operators that
+        form a semiring, so we should be able to map this to
+        integer arithmetic.
+
+        Here we use "homomorphism" in a slightly casual sense
+        of the word.
+        """
+        T = Bool(True)
+        F = Bool(False)
+
+        samples = [T, F]
+        f = lambda b: 1 if b.b else 0
+        g = lambda n: Bool(n >= 1)
+
+        assert f(T) + f(T) + f(T) == 3
+        assert g(3) == T
+
+        assert (f(T) + f(T)) * (f(T) + f(T)) * (f(T) + f(T)) == 8
+        assert g(8) == T
+
+        assert f(F) * f(T) * f(T) == 0
+        assert g(0) == F
+
+        verify_homomorphism(samples, f, g, Bool, int)
 
     @run_test
     def NumberList_can_compute_int_trivially():
