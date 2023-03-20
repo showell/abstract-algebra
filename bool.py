@@ -79,6 +79,10 @@ if __name__ == "__main__":
         assert T * F == F
         assert T * T == T
 
+        assert T == T
+        assert F == F
+        assert F != T
+
     @run_test
     def Bool_is_semi_ring():
         verify_semiring([T, F], zero=F, one=T)
