@@ -1,21 +1,22 @@
+def mod5(n):
+    return n % 5
+
 class Mod5:
     def __init__(self, n):
         assert n in [0, 1, 2, 3, 4]
         self.n = n
 
     def __add__(self, other):
-        return Mod5((self.n + other.n) % 5)
+        return Mod5(mod5(self.n + other.n))
 
     def __eq__(self, other):
         return self.n == other.n
 
     def __mul__(self, other):
-        return Mod5((self.n * other.n) % 5)
+        return Mod5(mod5(self.n * other.n))
 
     def __neg__(self):
-        if self.n == 0:
-            return self
-        return Mod5(5 - self.n)
+        return Mod5(mod5(5 - self.n))
 
     def __pow__(self, exp):
         return self.raised_to_exponent(exp)
