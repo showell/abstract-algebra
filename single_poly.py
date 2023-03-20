@@ -188,24 +188,40 @@ class SingleVarPoly:
         return SingleVarPoly([c], math, var_name)
 
 
+class IntegerMath:
+    add = lambda a, b: a + b
+    additive_inverse = lambda a: -a
+    multiply_by_constant = lambda a, b: a * b
+    power = lambda n, p: n**p
+    value_type = int
+    zero = 0
+    one = 1
+
+
+def IntegerPoly(lst):
+    return SingleVarPoly(lst, IntegerMath, "x")
+
+
+class IntegerPolyMath:
+    add = lambda a, b: a + b
+    additive_inverse = lambda a: -a
+    multiply_by_constant = lambda a, b: a * b
+    power = lambda poly, exp: poly.raised_to_exponent(exp)
+    value_type = SingleVarPoly
+    zero = IntegerPoly([])
+    one = IntegerPoly([1])
+
+
+def PolyPoly(lst):
+    return SingleVarPoly(lst, IntegerPolyMath, "p")
+
+
 if __name__ == "__main__":
     import commutative_ring
 
     def assert_str(p, expected_str):
         if str(p) != expected_str:
             raise AssertionError(f"got {p} when expecting {expected_str}")
-
-    class IntegerMath:
-        add = lambda a, b: a + b
-        additive_inverse = lambda a: -a
-        multiply_by_constant = lambda a, b: a * b
-        power = lambda n, p: n**p
-        value_type = int
-        zero = 0
-        one = 1
-
-    def IntegerPoly(lst):
-        return SingleVarPoly(lst, IntegerMath, "x")
 
     assert IntegerPoly([1, 0, 2]) + IntegerPoly([2, 4, 7, 8]) == IntegerPoly(
         [3, 4, 9, 8]
@@ -249,21 +265,6 @@ if __name__ == "__main__":
         q,
         "x**9+(15)*x**8+(96)*x**7+(350)*x**6+(822)*x**5+(1320)*x**4+(1468)*x**3+(1110)*x**2+(525)*x+125",
     )
-
-    ip_zero = zero
-    ip_one = one
-
-    class IntegerPolyMath:
-        add = lambda a, b: a + b
-        additive_inverse = lambda a: -a
-        multiply_by_constant = lambda a, b: a * b
-        power = lambda poly, exp: poly.raised_to_exponent(exp)
-        value_type = SingleVarPoly
-        zero = ip_zero
-        one = ip_one
-
-    def PolyPoly(lst):
-        return SingleVarPoly(lst, IntegerPolyMath, "p")
 
     assert PolyPoly([one, two]) + PolyPoly([two]) == PolyPoly([three, two])
     assert PolyPoly([one, one]) * PolyPoly([one, one]) == PolyPoly([one, two, one])
