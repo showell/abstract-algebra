@@ -171,16 +171,6 @@ class SingleVarPoly:
         self.lst = lst
 
     @staticmethod
-    def base_values(math, var_name):
-        enforce_math_protocol(math)
-        enforce_type(var_name, str)
-        make = lambda lst: SingleVarPoly(lst, math, var_name)
-        zero = make([])
-        one = make([math.one])
-        x = make([math.zero, math.one])
-        return zero, one, x
-
-    @staticmethod
     def constant(c, math, var_name):
         enforce_math_protocol(math)
         enforce_type(var_name, str)
@@ -198,8 +188,15 @@ class IntegerMath:
     one = 1
 
 
-def IntegerPoly(lst):
-    return SingleVarPoly(lst, IntegerMath, "x")
+class IntegerPoly:
+    zero = SingleVarPoly.constant(0, IntegerMath, "x")
+    one = SingleVarPoly.constant(1, IntegerMath, "x")
+    two = SingleVarPoly.constant(2, IntegerMath, "x")
+    x = SingleVarPoly([0, 1], IntegerMath, "x")
+
+    @staticmethod
+    def make(lst):
+        return SingleVarPoly(lst, IntegerMath, "x")
 
 
 class IntegerPolyMath:
@@ -208,8 +205,8 @@ class IntegerPolyMath:
     multiply_by_constant = lambda a, b: a * b
     power = lambda poly, exp: poly.raised_to_exponent(exp)
     value_type = SingleVarPoly
-    zero = IntegerPoly([])
-    one = IntegerPoly([1])
+    zero = IntegerPoly.zero
+    one = IntegerPoly.one
 
 
 def PolyPoly(lst):
@@ -220,33 +217,34 @@ if __name__ == "__main__":
     import commutative_ring
     from test_helpers import assert_str, run_test
 
+    IP = IntegerPoly.make
+
     @run_test
     def check_IntegerPoly_basics():
-        assert IntegerPoly([1, 0, 2]) + IntegerPoly([2, 4, 7, 8]) == IntegerPoly(
-            [3, 4, 9, 8]
-        )
+        assert IP([1, 0, 2]) + IP([2, 4, 7, 8]) == IP([3, 4, 9, 8])
         assert 201 + 8742 == 8943
 
-        assert IntegerPoly([1, 2]) * IntegerPoly([1, 3]) == IntegerPoly([1, 5, 6])
+        assert IP([1, 2]) * IP([1, 3]) == IP([1, 5, 6])
         assert 21 * 31 == 651
 
-        assert IntegerPoly([7, 8]) * IntegerPoly([1, 6]) == IntegerPoly([7, 50, 48])
+        assert IP([7, 8]) * IP([1, 6]) == IP([7, 50, 48])
         assert 87 * 61 == 48 * 100 + 50 * 10 + 7
 
     @run_test
     def check_IntegerPoly_is_ring():
         samples = [
-            IntegerPoly([]),
-            IntegerPoly([42, 39, 2]),
-            IntegerPoly([-8, 0, 0, 0, 5]),
-            IntegerPoly([103, 8256523499]),
+            IP([]),
+            IP([42, 39, 2]),
+            IP([-8, 0, 0, 0, 5]),
+            IP([103, 8256523499]),
         ]
 
-        zero, one, x = SingleVarPoly.base_values(IntegerMath, "x")
-        commutative_ring.test(samples, zero=zero, one=one)
+        commutative_ring.test(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
 
-    zero, one, x = SingleVarPoly.base_values(IntegerMath, "x")
-    two = SingleVarPoly.constant(2, IntegerMath, "x")
+    zero = IntegerPoly.zero
+    one = IntegerPoly.one
+    two = IntegerPoly.two
+    x = IntegerPoly.x
     three = two + one
 
     @run_test
@@ -256,7 +254,7 @@ if __name__ == "__main__":
         assert_str(two, "2")
         assert_str(three, "3")
         assert_str(x, "x")
-        assert_str(IntegerPoly([1, 2, 3, 4]), "(4)*x**3+(3)*x**2+(2)*x+1")
+        assert_str(IP([1, 2, 3, 4]), "(4)*x**3+(3)*x**2+(2)*x+1")
 
     p = (x + one) * (x + three) * (x + one) + two
     q = p.raised_to_exponent(3)
