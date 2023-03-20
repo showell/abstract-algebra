@@ -195,7 +195,7 @@ class IntegerPoly:
     x = SingleVarPoly([0, 1], IntegerMath, "x")
 
     @staticmethod
-    def make(lst):
+    def from_list(lst):
         return SingleVarPoly(lst, IntegerMath, "x")
 
 
@@ -209,15 +209,21 @@ class IntegerPolyMath:
     one = IntegerPoly.one
 
 
-def PolyPoly(lst):
-    return SingleVarPoly(lst, IntegerPolyMath, "p")
+class PolyPoly:
+    zero = SingleVarPoly.constant(IntegerPoly.zero, IntegerPolyMath, "p")
+    one = SingleVarPoly.constant(IntegerPoly.one, IntegerPolyMath, "p")
+
+    @staticmethod
+    def from_list(lst):
+        return SingleVarPoly(lst, IntegerPolyMath, "p")
 
 
 if __name__ == "__main__":
     import commutative_ring
     from test_helpers import assert_str, run_test
 
-    IP = IntegerPoly.make
+    IP = IntegerPoly.from_list
+    PP = PolyPoly.from_list
 
     @run_test
     def check_IntegerPoly_basics():
@@ -273,24 +279,22 @@ if __name__ == "__main__":
 
     @run_test
     def check_PolyPoly_basics():
-        assert PolyPoly([one, two]) + PolyPoly([two]) == PolyPoly([three, two])
-        assert PolyPoly([one, one]) * PolyPoly([one, one]) == PolyPoly([one, two, one])
+        assert PP([one, two]) + PP([two]) == PP([three, two])
+        assert PP([one, one]) * PP([one, one]) == PP([one, two, one])
 
-        pp = PolyPoly([one, two, x])
+        pp = PP([one, two, x])
         assert_str(pp, "(x)*p**2+(2)*p+1")
-        assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
         assert_str(pp.eval(x + one), "x**3+(2)*x**2+(3)*x+3")
         assert_str(pp.eval(x * x * x + three), "x**7+(6)*x**4+(2)*x**3+(9)*x+7")
+
+        assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
 
     @run_test
     def check_PolyPoly_is_ring():
         samples = [
-            PolyPoly([one, two, three]),
-            PolyPoly([p, q, x, p, q, x]),
-            PolyPoly([x + one, x + two, p + three]),
+            PP([one, two, three]),
+            PP([p, q, x, p, q, x]),
+            PP([x + one, x + two, p + three]),
         ]
 
-        pp_zero = PolyPoly([])
-        pp_one = PolyPoly([one])
-
-        commutative_ring.test(samples, zero=pp_zero, one=pp_one)
+        commutative_ring.test(samples, zero=PolyPoly.zero, one=PolyPoly.one)
