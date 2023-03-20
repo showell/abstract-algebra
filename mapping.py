@@ -84,7 +84,7 @@ if __name__ == "__main__":
         verify_homomorphism(samples, f, g, Bool, int)
 
     @run_test
-    def NumberList_can_compute_int_trivially():
+    def NumberList_can_trivally_compute_int():
         samples = [-7, 42, 13, 9, 4567, 14]
         f = lambda n: NumberList([n])
         g = lambda nl: nl.lst[0]
