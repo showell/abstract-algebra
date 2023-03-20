@@ -28,6 +28,7 @@ def verify_axioms(samples, *, zero, one):
 
             for c in samples:
                 assert a * (b + c) == a * b + a * c
+                assert (b + c) * a == b * a + c * a
                 assert (a + b) + c == a + (b + c)
                 assert (a * b) * c == (a * b) * c
 
