@@ -19,8 +19,21 @@ class NumberList:
     def __neg__(self):
         return NumberList.negate(self)
 
+    def __pow__(self, n):
+        return self.raised_to_exponent(n)
+
     def __str__(self):
         return str(self.lst)
+
+    def raised_to_exponent(self, exponent):
+        if exponent < 0:
+            raise ValueError("we do not support negative exponents")
+
+        if exponent == 0:
+            return NumberList([1])
+        if exponent == 1:
+            return self
+        return self * self.raised_to_exponent(exponent - 1)
 
     def simplify(self):
         self.lst = NumberList.simplify_list(self.lst)
@@ -37,7 +50,7 @@ class NumberList:
 
     @staticmethod
     def equal(number_list1, number_list2):
-        return number_list2.lst == number_list2.lst
+        return number_list1.lst == number_list2.lst
 
     @staticmethod
     def mul(number_list1, number_list2):
@@ -67,7 +80,7 @@ class NumberList:
 
 if __name__ == "__main__":
     from commutative_ring import verify_axioms
-    from lib.test_helpers import run_test
+    from lib.test_helpers import assert_equal, run_test
 
     @run_test
     def verify_basics():
@@ -83,6 +96,11 @@ if __name__ == "__main__":
         assert 87 * 61 == 48 * 100 + 50 * 10 + 7
 
     @run_test
+    def verify_equality_check():
+        assert NumberList([5, 2]) == NumberList([5, 2])
+        assert NumberList([5]) != NumberList([5, 2])
+
+    @run_test
     def number_list_is_a_ring():
         samples = [
             NumberList([]),
@@ -93,3 +111,8 @@ if __name__ == "__main__":
         zero = NumberList([])
         one = NumberList([1])
         verify_axioms(samples, zero=zero, one=one)
+
+    @run_test
+    def exponentiation():
+        x = NumberList([5, 7, -21])
+        assert_equal(x ** 3, x * x * x)

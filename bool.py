@@ -22,6 +22,11 @@ class Bool:
     def __mul__(self, other):
         return Bool(self.b and other.b)
 
+    def __pow__(self, exponent):
+        if exponent == 0:
+            return Bool(True)
+        return self
+
     def __str__(self):
         return str(self.b)
 
@@ -77,3 +82,12 @@ if __name__ == "__main__":
     @run_test
     def Bool_is_semi_ring():
         verify_semiring([T, F], zero=F, one=T)
+
+    @run_test
+    def exponentiation():
+        assert T**47 == T
+        assert F**942 == F
+        assert F**0 == T
+        assert F**1 == F
+        assert T**0 == T
+        assert T**1 == T

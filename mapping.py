@@ -6,6 +6,9 @@ def verify_homomorphism(samples, f, g, type1, type2):
         assert type(g(f(a))) == type1
         assert g(f(a)) == a
 
+        for exp in range(8):
+            assert g(f(a) ** exp) == g(f(a ** exp)) 
+
         for b in samples:
             assert g(f(a) + f(b)) == g(f(a + b))
             assert g(f(a) * f(b)) == g(f(a * b))
