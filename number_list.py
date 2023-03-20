@@ -67,22 +67,29 @@ class NumberList:
 
 if __name__ == "__main__":
     from commutative_ring import verify_axioms
+    from lib.test_helpers import run_test
 
-    assert NumberList([1, 0, 2]) + NumberList([2, 4, 7, 8]) == NumberList([3, 4, 9, 8])
-    assert 201 + 8742 == 8943
+    @run_test
+    def verify_basics():
+        assert NumberList([1, 0, 2]) + NumberList([2, 4, 7, 8]) == NumberList(
+            [3, 4, 9, 8]
+        )
+        assert 201 + 8742 == 8943
 
-    assert NumberList([1, 2]) * NumberList([1, 3]) == NumberList([1, 5, 6])
-    assert 21 * 31 == 651
+        assert NumberList([1, 2]) * NumberList([1, 3]) == NumberList([1, 5, 6])
+        assert 21 * 31 == 651
 
-    assert NumberList([7, 8]) * NumberList([1, 6]) == NumberList([7, 50, 48])
-    assert 87 * 61 == 48 * 100 + 50 * 10 + 7
+        assert NumberList([7, 8]) * NumberList([1, 6]) == NumberList([7, 50, 48])
+        assert 87 * 61 == 48 * 100 + 50 * 10 + 7
 
-    samples = [
-        NumberList([]),
-        NumberList([42, 39, 2]),
-        NumberList([-8, 0, 0, 0, 5]),
-        NumberList([103, 8256523499]),
-    ]
-    zero = NumberList([])
-    one = NumberList([1])
-    verify_axioms(samples, zero=zero, one=one)
+    @run_test
+    def number_list_is_a_ring():
+        samples = [
+            NumberList([]),
+            NumberList([42, 39, 2]),
+            NumberList([-8, 0, 0, 0, 5]),
+            NumberList([103, 8256523499]),
+        ]
+        zero = NumberList([])
+        one = NumberList([1])
+        verify_axioms(samples, zero=zero, one=one)
