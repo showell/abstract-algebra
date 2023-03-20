@@ -1,5 +1,5 @@
 from mod5 import Mod5
-from single_poly import SingleVarPoly
+from poly import SingleVarPoly
 
 
 class Mod5Math:
