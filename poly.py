@@ -34,6 +34,9 @@ class SingleVarPoly:
     def __neg__(self):
         return self.additive_inverse()
 
+    def __pow__(self, exponent):
+        return self.raised_to_exponent(exponent)
+
     def __str__(self):
         return self.polynomial_string()
 

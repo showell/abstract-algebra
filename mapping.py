@@ -13,12 +13,13 @@ def verify_homomorphism(samples, f, g, type1, type2):
             assert g(f(a) + f(b)) == g(f(a + b))
             assert g(f(a) * f(b)) == g(f(a * b))
 
-
 if __name__ == "__main__":
     from fractions import Fraction
     from bool import Bool
     from mod5 import Mod5
     from number_list import NumberList
+    from poly import SingleVarPoly
+    from poly_integer import IntegerPoly
     from lib.test_helpers import run_test
 
     def get_digits(n):
@@ -97,3 +98,16 @@ if __name__ == "__main__":
         g = lambda nl: number_from_digit_list(nl.lst)
 
         verify_homomorphism(samples, f, g, int, NumberList)
+
+    @run_test
+    def NumberList_can_compute_integer_polynomials():
+        samples = [
+            IntegerPoly.from_list([0, 1, 3]),
+            IntegerPoly.from_list([-47]),
+            IntegerPoly.from_list([43, 0, 0, 0, 0, 27]),
+        ]
+
+        f = lambda ip: NumberList(ip.lst)
+        g = lambda nl: IntegerPoly.from_list(nl.lst)
+
+        verify_homomorphism(samples, f, g, SingleVarPoly, NumberList)
