@@ -13,8 +13,18 @@ class Mod5Math:
     one = Mod5(1)
 
 
-def Mod5Poly(lst):
-    return SingleVarPoly(lst, Mod5Math, "x")
+class Mod5Poly:
+    const = lambda c: SingleVarPoly.constant(Mod5(c), Mod5Math, "m")
+    zero = const(0)
+    one = const(1)
+    two = const(2)
+    three = const(3)
+    four = const(4)
+    m = SingleVarPoly([Mod5(0), Mod5(1)], Mod5Math, "m")
+
+    @staticmethod
+    def from_list(lst):
+        return SingleVarPoly(lst, Mod5Math, "m")
 
 
 if __name__ == "__main__":
@@ -27,26 +37,27 @@ if __name__ == "__main__":
     three = Mod5(3)
     four = Mod5(4)
 
-    p_zero = Mod5Poly([])
-    p_one = Mod5Poly([one])
-    p_two = Mod5Poly([two])
-    p_three = Mod5Poly([three])
-    p_four = Mod5Poly([four])
-    p_x = Mod5Poly([zero, one])
+    p_zero = Mod5Poly.zero
+    p_one = Mod5Poly.one
+    p_two = Mod5Poly.two
+    p_three = Mod5Poly.three
+    p_four = Mod5Poly.four
+    p_m = Mod5Poly.m
 
     @run_test
     def polynomial_math_works_over_mod5():
-        q = (p_x + p_four) * (p_x + p_three)
-        assert_str(q, "x**2+(2)*x+2")
+        q = (p_m + p_four) * (p_m + p_three)
+        assert_str(q, "m**2+(2)*m+2")
         assert q.eval(four) == one
 
     @run_test
     def mod5_polys_conform_to_axioms():
         poly_samples = [
-            Mod5Poly([one, zero, three]),
-            Mod5Poly([three, one, four, two]),
-            Mod5Poly([two]),
-            (p_x * p_two) + p_one,
-            (p_x + p_three).raised_to_exponent(15),
+            Mod5Poly.from_list([one, zero, three]),
+            Mod5Poly.from_list([three, one, four, two]),
+            Mod5Poly.from_list([one, four, two, three, three]),
+            Mod5Poly.from_list([two]),
+            (p_m * p_two) + p_one,
+            (p_m + p_three).raised_to_exponent(15),
         ]
         verify_axioms(poly_samples, zero=p_zero, one=p_one)

@@ -1,6 +1,7 @@
 def mod5(n):
     return n % 5
 
+
 class Mod5:
     def __init__(self, n):
         assert n in [0, 1, 2, 3, 4]
