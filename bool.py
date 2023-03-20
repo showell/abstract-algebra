@@ -89,6 +89,12 @@ if __name__ == "__main__":
 
     @run_test
     def exponentiation():
+        assert T * T == T**2
+        assert F * F == F**2
+
+        assert T * T * T == T**3
+        assert F * F * F == F**3
+
         assert T**47 == T
         assert F**942 == F
         assert F**0 == T
