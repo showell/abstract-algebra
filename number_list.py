@@ -2,80 +2,93 @@ def arr_get(lst, i):
     return lst[i] if i < len(lst) else 0
 
 
-class NumberList:
+class BasicNumberList:
     def __init__(self, lst):
         self.lst = lst
         self.simplify()
-
-    def __add__(self, other):
-        return NumberList.add(self, other)
-
-    def __eq__(self, other):
-        return NumberList.equal(self, other)
-
-    def __mul__(self, other):
-        return NumberList.mul(self, other)
-
-    def __neg__(self):
-        return NumberList.negate(self)
-
-    def __pow__(self, n):
-        return self.raised_to_exponent(n)
-
-    def __str__(self):
-        return str(self.lst)
 
     def raised_to_exponent(self, exponent):
         if exponent < 0:
             raise ValueError("we do not support negative exponents")
 
         if exponent == 0:
-            return NumberList([1])
+            return BasicNumberList([1])
         if exponent == 1:
             return self
-        return self * self.raised_to_exponent(exponent - 1)
+        return BasicNumberList.mul(self, self.raised_to_exponent(exponent - 1))
 
     def simplify(self):
-        self.lst = NumberList.simplify_list(self.lst)
+        self.lst = BasicNumberList.simplify_list(self.lst)
 
     @staticmethod
-    def add(number_list1, number_list2):
-        lst1 = number_list1.lst
-        lst2 = number_list2.lst
+    def add(basic_number_list1, basic_number_list2):
+        lst1 = basic_number_list1.lst
+        lst2 = basic_number_list2.lst
         # do the analog of elementary school arithmetic
         new_size = max(len(lst1), len(lst2))
-        return NumberList(
+        return BasicNumberList(
             [arr_get(lst1, i) + arr_get(lst2, i) for i in range(new_size)]
         )
 
     @staticmethod
-    def equal(number_list1, number_list2):
-        return number_list1.lst == number_list2.lst
+    def equal(basic_number_list1, basic_number_list2):
+        return basic_number_list1.lst == basic_number_list2.lst
 
     @staticmethod
-    def mul(number_list1, number_list2):
-        lst1 = number_list1.lst
-        lst2 = number_list2.lst
+    def mul(basic_number_list1, basic_number_list2):
+        lst1 = basic_number_list1.lst
+        lst2 = basic_number_list2.lst
         # do the analog of elementary school arithmetic
-        result = NumberList([])
+        result = BasicNumberList([])
         for i, elem in enumerate(lst1):
-            result += NumberList.mul_by_constant(elem, [0] * i + lst2)
+            sub_result = BasicNumberList.mul_by_constant(elem, [0] * i + lst2)
+            result = BasicNumberList.add(result, sub_result)
         return result
 
     @staticmethod
     def mul_by_constant(c, lst):
-        return NumberList([c * elem for elem in lst])
+        return BasicNumberList([c * elem for elem in lst])
 
     @staticmethod
-    def negate(number_list):
-        lst = number_list.lst
-        return NumberList([-elem for elem in lst])
+    def negate(basic_number_list):
+        lst = basic_number_list.lst
+        return BasicNumberList([-elem for elem in lst])
 
     @staticmethod
     def simplify_list(lst):
         while lst and lst[-1] == 0:
             lst = lst[:-1]
         return lst
+
+
+class NumberList:
+    def __init__(self, lst):
+        self.bnl = BasicNumberList(lst)
+
+    def __add__(self, other):
+        bnl_1 = self.bnl
+        bnl_2 = other.bnl
+        return NumberList(BasicNumberList.add(bnl_1, bnl_2).lst)
+
+    def __eq__(self, other):
+        return BasicNumberList.equal(self.bnl, other.bnl)
+
+    def __mul__(self, other):
+        bnl_1 = self.bnl
+        bnl_2 = other.bnl
+        return NumberList(BasicNumberList.mul(bnl_1, bnl_2).lst)
+
+    def __neg__(self):
+        return NumberList(BasicNumberList.negate(self.bnl).lst)
+
+    def __pow__(self, n):
+        return NumberList(self.bnl.raised_to_exponent(n).lst)
+
+    def __str__(self):
+        return str(self.bnl.lst)
+
+    def list(self):
+        return self.bnl.lst
 
 
 if __name__ == "__main__":

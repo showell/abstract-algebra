@@ -87,7 +87,7 @@ if __name__ == "__main__":
     def NumberList_can_trivally_compute_int():
         samples = [-7, 42, 13, 9, 4567, 14]
         f = lambda n: NumberList([n])
-        g = lambda nl: nl.lst[0]
+        g = lambda nl: nl.list()[0]
 
         verify_homomorphism(samples, f, g, int, NumberList)
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         assert number_from_digit_list([5, 6, 7]) == 765
 
         f = lambda n: NumberList(get_digits(n))
-        g = lambda nl: number_from_digit_list(nl.lst)
+        g = lambda nl: number_from_digit_list(nl.list())
 
         verify_homomorphism(samples, f, g, int, NumberList)
 
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         type_b = NumberList
 
         a_to_b = lambda ip: NumberList(ip.lst)
-        b_to_a = lambda nl: IntegerPoly.from_list(nl.lst)
+        b_to_a = lambda nl: IntegerPoly.from_list(nl.list())
 
         verify_isomorphism(
             samples_a=samples_a,
