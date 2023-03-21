@@ -25,20 +25,45 @@ class BoolPoly:
     def from_list(lst):
         return SingleVarPoly(BoolMath, lst, "p")
 
+    @staticmethod
+    def from_ints(ints):
+        assert type(ints) == set
+        F = Bool(False)
+        T = Bool(True)
+
+        lst = [T if n in ints else F for n in range(max(ints) + 1)]
+
+        return BoolPoly.from_list(lst)
+
+    @staticmethod
+    def to_ints(bp):
+        T = Bool(True)
+        nums = [i for i, b in enumerate(bp.lst) if b == T]
+        return sorted(nums)
+
 
 if __name__ == "__main__":
     from lib.test_helpers import assert_str, run_test
 
     @run_test
-    def show():
+    def show_relation_to_ints():
         F = Bool(False)
         T = Bool(True)
 
-        x = BoolPoly.from_list([T, F, T, F, T, F, T])
-        y = BoolPoly.from_list([F, F, F, T])
-        z = BoolPoly.from_list([F, F, F, F, T])
+        x = BoolPoly.from_ints({0, 2, 4, 6})
+        y = BoolPoly.from_ints({3})
+        z = BoolPoly.from_ints({4})
         p = x * y * z
         assert_str(p, "p**13+p**11+p**9+p**7")
+        assert BoolPoly.to_ints(p) == [7, 9, 11, 13]
+        assert 7 == 0 + 3 + 4
+        assert 9 == 2 + 3 + 4
+        assert 11 == 4 + 3 + 4
+        assert 13 == 6 + 3 + 4
+
+        q = x + y + z
+        assert_str(q, "p**6+p**4+p**3+p**2+True")
+        assert BoolPoly.to_ints(q) == [0, 2, 3, 4, 6]
 
         assert p.eval(F) == F
         assert p.eval(T) == T
