@@ -15,7 +15,7 @@ class AbstractMath:
         enforce_type(a, self.value_type)        
         return -a
 
-    def multiply_by_constant(self, a, b):
+    def multiply(self, a, b):
         enforce_type(a, self.value_type)        
         enforce_type(b, self.value_type)        
         return a * b

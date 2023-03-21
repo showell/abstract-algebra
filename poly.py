@@ -68,7 +68,7 @@ class SingleVarPoly:
 
     def eval(self, x):
         add = self.math.add
-        mul = self.math.multiply_by_constant
+        mul = self.math.multiply
         power = lambda degree: self.math.power(x, degree)
 
         result = self.math.zero
@@ -79,7 +79,7 @@ class SingleVarPoly:
 
     def multiply_by_constant(self, c, lst):
         enforce_list_types(lst, self.math.value_type)
-        mul = self.math.multiply_by_constant
+        mul = self.math.multiply
         return self.new([mul(c, elem) for elem in lst])
 
     def multiply_with(self, other):
