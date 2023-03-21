@@ -23,7 +23,7 @@ class Mod5Poly:
     two = const(2)
     three = const(3)
     four = const(4)
-    m = SingleVarPoly([Mod5(0), Mod5(1)], Mod5Math, "m")
+    m = SingleVarPoly.degree_one_var("m", Mod5Math)
 
     @staticmethod
     def from_list(lst):

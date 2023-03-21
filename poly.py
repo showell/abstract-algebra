@@ -159,3 +159,9 @@ class SingleVarPoly:
         enforce_math_protocol(math)
         enforce_type(c, math.value_type)
         return SingleVarPoly([c], math, None)
+
+    @staticmethod
+    def degree_one_var(var_name, math):
+        enforce_type(var_name, str)
+        enforce_math_protocol(math)
+        return SingleVarPoly([math.zero, math.one], math, var_name)

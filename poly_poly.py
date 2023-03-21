@@ -16,7 +16,7 @@ class PolyPoly:
     const = lambda c: SingleVarPoly.constant(c, IntegerPolyMath)
     zero = const(IntegerPoly.zero)
     one = const(IntegerPoly.one)
-    p = SingleVarPoly([IntegerPoly.zero, IntegerPoly.one], IntegerPolyMath, "p")
+    p = SingleVarPoly.degree_one_var("p", IntegerPolyMath)
 
     @staticmethod
     def from_list(lst):

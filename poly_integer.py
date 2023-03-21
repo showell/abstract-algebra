@@ -15,7 +15,7 @@ class IntegerPoly:
     zero = SingleVarPoly.constant(0, IntegerMath)
     one = SingleVarPoly.constant(1, IntegerMath)
     two = SingleVarPoly.constant(2, IntegerMath)
-    x = SingleVarPoly([0, 1], IntegerMath, "x")
+    x = SingleVarPoly.degree_one_var("x", IntegerMath)
 
     @staticmethod
     def from_list(lst):
