@@ -12,9 +12,9 @@ class IntegerMath:
 
 
 class IntegerPoly:
-    zero = SingleVarPoly.constant(0, IntegerMath, "x")
-    one = SingleVarPoly.constant(1, IntegerMath, "x")
-    two = SingleVarPoly.constant(2, IntegerMath, "x")
+    zero = SingleVarPoly.constant(0, IntegerMath)
+    one = SingleVarPoly.constant(1, IntegerMath)
+    two = SingleVarPoly.constant(2, IntegerMath)
     x = SingleVarPoly([0, 1], IntegerMath, "x")
 
     @staticmethod

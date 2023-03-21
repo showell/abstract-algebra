@@ -17,7 +17,7 @@ class Mod5Math:
 
 
 class Mod5Poly:
-    const = lambda c: SingleVarPoly.constant(Mod5(c), Mod5Math, "m")
+    const = lambda c: SingleVarPoly.constant(Mod5(c), Mod5Math)
     zero = const(0)
     one = const(1)
     two = const(2)

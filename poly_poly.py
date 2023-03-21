@@ -13,8 +13,8 @@ class IntegerPolyMath:
 
 
 class PolyPoly:
-    zero = SingleVarPoly.constant(IntegerPoly.zero, IntegerPolyMath, "p")
-    one = SingleVarPoly.constant(IntegerPoly.one, IntegerPolyMath, "p")
+    zero = SingleVarPoly.constant(IntegerPoly.zero, IntegerPolyMath)
+    one = SingleVarPoly.constant(IntegerPoly.one, IntegerPolyMath)
 
     @staticmethod
     def from_list(lst):

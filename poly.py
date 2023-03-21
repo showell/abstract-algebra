@@ -13,7 +13,8 @@ class SingleVarPoly:
     def __init__(self, lst, math, var_name):
         enforce_math_protocol(math)
         enforce_list_types(lst, math.value_type)
-        enforce_type(var_name, str)
+        if len(lst) > 1 and var_name is not None:
+            enforce_type(var_name, str)
         self.enhanced_type = (SingleVarPoly, math.value_type)
         self.lst = lst
         self.math = math
@@ -52,15 +53,18 @@ class SingleVarPoly:
         lst2 = other.lst
         # do the analog of elementary school arithmetic
         new_size = max(len(lst1), len(lst2))
-        return self.new(
-            [arr_get(lst1, i, zero) + arr_get(lst2, i, zero) for i in range(new_size)]
+        return SingleVarPoly(
+            [arr_get(lst1, i, zero) + arr_get(lst2, i, zero) for i in range(new_size)],
+            self.math,
+            self.var_name or other.var_name,
         )
 
     def enforce_partner_type(self, other):
         assert type(other) == SingleVarPoly
         assert type(other.math) == type(self.math)
         assert enhanced_type(self) == enhanced_type(other)
-        assert self.var_name == other.var_name
+        if self.var_name is not None and other.var_name is not None:
+            assert self.var_name == other.var_name
 
     def eval(self, x):
         add = self.math.add
@@ -89,8 +93,9 @@ class SingleVarPoly:
         zero = self.math.zero
         lst1 = self.lst
         lst2 = other.lst
+        var_name = self.var_name or other.var_name
         # do the analog of elementary school arithmetic
-        result = self.new([])
+        result = SingleVarPoly([], self.math, var_name)
         for i, elem in enumerate(lst1):
             result += self.multiply_by_constant(elem, [zero] * i + lst2)
         return result
@@ -149,8 +154,7 @@ class SingleVarPoly:
         self.lst = lst
 
     @staticmethod
-    def constant(c, math, var_name):
+    def constant(c, math):
         enforce_math_protocol(math)
-        enforce_type(var_name, str)
         enforce_type(c, math.value_type)
-        return SingleVarPoly([c], math, var_name)
+        return SingleVarPoly([c], math, None)
