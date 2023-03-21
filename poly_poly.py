@@ -13,8 +13,9 @@ class IntegerPolyMath:
 
 
 class PolyPoly:
-    zero = SingleVarPoly.constant(IntegerPoly.zero, IntegerPolyMath)
-    one = SingleVarPoly.constant(IntegerPoly.one, IntegerPolyMath)
+    const = lambda c: SingleVarPoly.constant(c, IntegerPolyMath)
+    zero = const(IntegerPoly.zero)
+    one = const(IntegerPoly.one)
     p = SingleVarPoly([IntegerPoly.zero, IntegerPoly.one], IntegerPolyMath, "p")
 
     @staticmethod
