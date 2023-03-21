@@ -5,6 +5,15 @@ a multiplicative identity element (which we call "one").
 
 
 def verify_axioms(samples, *, zero, one):
+    assert len(samples) >= 2
+
+    # Make sure our samples are different from each
+    # other (and that the equality operation actually
+    # has meaning).
+    for i in range(len(samples)):
+        for j in range(i + 1, len(samples)):
+            assert samples[i] != samples[j]
+
     assert zero * zero == zero
     assert zero * one == zero
     assert one * zero == zero
