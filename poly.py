@@ -11,7 +11,7 @@ def arr_get(lst, i, zero):
 
 
 class SingleVarPoly:
-    def __init__(self, lst, math, var_name):
+    def __init__(self, math, lst, var_name):
         enforce_math_protocol(math)
         enforce_list_types(lst, math.value_type)
         if len(lst) > 1 and var_name is not None:
@@ -55,8 +55,8 @@ class SingleVarPoly:
         # do the analog of elementary school arithmetic
         new_size = max(len(lst1), len(lst2))
         return SingleVarPoly(
-            [arr_get(lst1, i, zero) + arr_get(lst2, i, zero) for i in range(new_size)],
             self.math,
+            [arr_get(lst1, i, zero) + arr_get(lst2, i, zero) for i in range(new_size)],
             self.var_name or other.var_name,
         )
 
@@ -96,13 +96,13 @@ class SingleVarPoly:
         lst2 = other.lst
         var_name = self.var_name or other.var_name
         # do the analog of elementary school arithmetic
-        result = SingleVarPoly([], self.math, var_name)
+        result = SingleVarPoly(self.math, [], var_name)
         for i, elem in enumerate(lst1):
             result += self.multiply_by_constant(elem, [zero] * i + lst2)
         return result
 
     def new(self, lst):
-        return SingleVarPoly(lst, self.math, self.var_name)
+        return SingleVarPoly(self.math, lst, self.var_name)
 
     def one(self):
         return self.new([self.math.one])
@@ -155,13 +155,13 @@ class SingleVarPoly:
         self.lst = lst
 
     @staticmethod
-    def constant(c, math):
+    def constant(math, c):
         enforce_math_protocol(math)
         enforce_type(c, math.value_type)
-        return SingleVarPoly([c], math, None)
+        return SingleVarPoly(math, [c], None)
 
     @staticmethod
-    def degree_one_var(var_name, math):
-        enforce_type(var_name, str)
+    def degree_one_var(math, var_name):
         enforce_math_protocol(math)
-        return SingleVarPoly([math.zero, math.one], math, var_name)
+        enforce_type(var_name, str)
+        return SingleVarPoly(math, [math.zero, math.one], var_name)

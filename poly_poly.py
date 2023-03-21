@@ -13,14 +13,14 @@ class IntegerPolyMath:
 
 
 class PolyPoly:
-    const = lambda c: SingleVarPoly.constant(c, IntegerPolyMath)
+    const = lambda c: SingleVarPoly.constant(IntegerPolyMath, c)
     zero = const(IntegerPoly.zero)
     one = const(IntegerPoly.one)
-    p = SingleVarPoly.degree_one_var("p", IntegerPolyMath)
+    p = SingleVarPoly.degree_one_var(IntegerPolyMath, "p")
 
     @staticmethod
     def from_list(lst):
-        return SingleVarPoly(lst, IntegerPolyMath, "p")
+        return SingleVarPoly(IntegerPolyMath, lst, "p")
 
 
 if __name__ == "__main__":

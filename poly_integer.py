@@ -12,14 +12,15 @@ class IntegerMath:
 
 
 class IntegerPoly:
-    zero = SingleVarPoly.constant(0, IntegerMath)
-    one = SingleVarPoly.constant(1, IntegerMath)
-    two = SingleVarPoly.constant(2, IntegerMath)
-    x = SingleVarPoly.degree_one_var("x", IntegerMath)
+    const = lambda c: SingleVarPoly.constant(IntegerMath, c)
+    zero = const(0)
+    one = const(1)
+    two = const(2)
+    x = SingleVarPoly.degree_one_var(IntegerMath, "x")
 
     @staticmethod
     def from_list(lst):
-        return SingleVarPoly(lst, IntegerMath, "x")
+        return SingleVarPoly(IntegerMath, lst, "x")
 
 
 if __name__ == "__main__":

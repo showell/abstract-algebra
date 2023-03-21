@@ -17,17 +17,17 @@ class Mod5Math:
 
 
 class Mod5Poly:
-    const = lambda c: SingleVarPoly.constant(Mod5(c), Mod5Math)
+    const = lambda c: SingleVarPoly.constant(Mod5Math, Mod5(c))
     zero = const(0)
     one = const(1)
     two = const(2)
     three = const(3)
     four = const(4)
-    m = SingleVarPoly.degree_one_var("m", Mod5Math)
+    m = SingleVarPoly.degree_one_var(Mod5Math, "m")
 
     @staticmethod
     def from_list(lst):
-        return SingleVarPoly(lst, Mod5Math, "m")
+        return SingleVarPoly(Mod5Math, lst, "m")
 
 
 if __name__ == "__main__":
