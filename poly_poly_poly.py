@@ -1,16 +1,14 @@
 from poly import SingleVarPoly
 from poly_integer import IntegerPoly
 from poly_poly import PolyPoly
+from lib.abstract_math import AbstractMath
 
 
-class PolyPolyMath:
-    add = lambda a, b: a + b
-    additive_inverse = lambda a: -a
-    multiply_by_constant = lambda a, b: a * b
-    power = lambda poly, exp: poly.raised_to_exponent(exp)
-    value_type = SingleVarPoly
-    zero = PolyPoly.zero
-    one = PolyPoly.one
+PolyPolyMath = AbstractMath(
+    value_type=SingleVarPoly,
+    zero=PolyPoly.zero,
+    one=PolyPoly.one,
+)
 
 
 class PolyPolyPoly:

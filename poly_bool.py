@@ -1,19 +1,15 @@
 from bool import Bool
 from poly import SingleVarPoly
+from lib.abstract_math import AbstractMath
 
 
 def NOT_DEFINED():
     raise AssertionError("We don't allow boolean negation")
 
 
-class BoolMath:
-    add = lambda a, b: a + b
-    additive_inverse = NOT_DEFINED
-    multiply_by_constant = lambda a, b: a * b
-    power = lambda n, p: n**p
-    value_type = Bool
-    zero = Bool(False)
-    one = Bool(True)
+BoolMath = AbstractMath(value_type=Bool, zero=Bool(False), one=Bool(True))
+
+BoolMath.additive_inverse = NOT_DEFINED
 
 
 class BoolPoly:

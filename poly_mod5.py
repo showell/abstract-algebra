@@ -1,19 +1,9 @@
 from mod5 import Mod5
 from poly import SingleVarPoly
+from lib.abstract_math import AbstractMath
 
 
-class Mod5Math:
-    add = lambda a, b: a + b
-    additive_inverse = lambda a: -a
-    multiply_by_constant = lambda a, b: a * b
-    power = lambda m, exp: m**exp
-    value_type = Mod5
-
-    zero = Mod5(0)
-    one = Mod5(1)
-    two = Mod5(2)
-    three = Mod5(3)
-    four = Mod5(4)
+Mod5Math = AbstractMath(value_type=Mod5, zero=Mod5(0), one=Mod5(1))
 
 
 class Mod5Poly:
@@ -36,9 +26,9 @@ if __name__ == "__main__":
 
     zero = Mod5Math.zero
     one = Mod5Math.one
-    two = Mod5Math.two
-    three = Mod5Math.three
-    four = Mod5Math.four
+    two = Mod5(2)
+    three = Mod5(3)
+    four = Mod5(4)
 
     p_zero = Mod5Poly.zero
     p_one = Mod5Poly.one

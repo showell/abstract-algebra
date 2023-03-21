@@ -1,7 +1,7 @@
-from lib.type import enhanced_type
+from lib.abstract_math import AbstractMath
 from lib.type_enforcers import (
     enforce_list_types,
-    enforce_math_protocol,
+    enforce_subtype,
     enforce_type,
 )
 
@@ -12,11 +12,10 @@ def arr_get(lst, i, zero):
 
 class SingleVarPoly:
     def __init__(self, math, lst, var_name):
-        enforce_math_protocol(math)
+        enforce_subtype(math, AbstractMath)
         enforce_list_types(lst, math.value_type)
         if len(lst) > 1 and var_name is not None:
             enforce_type(var_name, str)
-        self.enhanced_type = (SingleVarPoly, math)
         self.lst = lst
         self.math = math
         self.var_name = var_name
@@ -63,7 +62,7 @@ class SingleVarPoly:
     def enforce_partner_type(self, other):
         assert type(other) == SingleVarPoly
         assert type(other.math) == type(self.math)
-        assert enhanced_type(self) == enhanced_type(other)
+        assert type(self) == type(other)
         if self.var_name is not None and other.var_name is not None:
             assert self.var_name == other.var_name
 
@@ -156,12 +155,12 @@ class SingleVarPoly:
 
     @staticmethod
     def constant(math, c):
-        enforce_math_protocol(math)
+        enforce_subtype(math, AbstractMath)
         enforce_type(c, math.value_type)
         return SingleVarPoly(math, [c], None)
 
     @staticmethod
     def degree_one_var(math, var_name):
-        enforce_math_protocol(math)
+        enforce_subtype(math, AbstractMath)
         enforce_type(var_name, str)
         return SingleVarPoly(math, [math.zero, math.one], var_name)

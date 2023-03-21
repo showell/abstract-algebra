@@ -1,15 +1,11 @@
 from poly import SingleVarPoly
 from poly_integer import IntegerPoly
+from lib.abstract_math import AbstractMath
 
 
-class IntegerPolyMath:
-    add = lambda a, b: a + b
-    additive_inverse = lambda a: -a
-    multiply_by_constant = lambda a, b: a * b
-    power = lambda poly, exp: poly.raised_to_exponent(exp)
-    value_type = SingleVarPoly
-    zero = IntegerPoly.zero
-    one = IntegerPoly.one
+IntegerPolyMath = AbstractMath(
+    value_type=SingleVarPoly, zero=IntegerPoly.zero, one=IntegerPoly.one
+)
 
 
 class PolyPoly:
@@ -25,7 +21,6 @@ class PolyPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_axioms
-    from poly_integer import IntegerMath
     from lib.test_helpers import assert_str, run_test
 
     PP = PolyPoly.from_list
@@ -52,9 +47,7 @@ if __name__ == "__main__":
     def check_eval():
         pp = PolyPoly.p * PolyPoly.p
         assert_str(pp, "p**2")
-        assert pp.enhanced_type == (SingleVarPoly, IntegerPolyMath)
         p = pp.eval(x + one)
-        assert p.enhanced_type == (SingleVarPoly, IntegerMath)
         assert_str(p, "x**2+(2)*x+1")
         assert p.eval(100) == 10201
 

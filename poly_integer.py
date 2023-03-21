@@ -1,14 +1,8 @@
 from poly import SingleVarPoly
+from lib.abstract_math import AbstractMath
 
 
-class IntegerMath:
-    add = lambda a, b: a + b
-    additive_inverse = lambda a: -a
-    multiply_by_constant = lambda a, b: a * b
-    power = lambda n, p: n**p
-    value_type = int
-    zero = 0
-    one = 1
+IntegerMath = AbstractMath(value_type=int, zero=0, one=1)
 
 
 class IntegerPoly:
