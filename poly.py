@@ -9,13 +9,14 @@ from lib.type_enforcers import (
 def arr_get(lst, i, zero):
     return lst[i] if i < len(lst) else zero
 
+
 class SingleVarPoly:
     def __init__(self, lst, math, var_name):
         enforce_math_protocol(math)
         enforce_list_types(lst, math.value_type)
         if len(lst) > 1 and var_name is not None:
             enforce_type(var_name, str)
-        self.enhanced_type = (SingleVarPoly, math.value_type)
+        self.enhanced_type = (SingleVarPoly, math)
         self.lst = lst
         self.math = math
         self.var_name = var_name

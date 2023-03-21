@@ -15,6 +15,7 @@ class IntegerPolyMath:
 class PolyPoly:
     zero = SingleVarPoly.constant(IntegerPoly.zero, IntegerPolyMath)
     one = SingleVarPoly.constant(IntegerPoly.one, IntegerPolyMath)
+    p = SingleVarPoly([IntegerPoly.zero, IntegerPoly.one], IntegerPolyMath, "p")
 
     @staticmethod
     def from_list(lst):
@@ -23,6 +24,7 @@ class PolyPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_axioms
+    from poly_integer import IntegerMath
     from lib.test_helpers import assert_str, run_test
 
     PP = PolyPoly.from_list
@@ -45,11 +47,21 @@ if __name__ == "__main__":
 
         assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
 
-    p = (x + one) * (x + three) * (x + one) + two
-    q = p.raised_to_exponent(3)
+    @run_test
+    def check_eval():
+        pp = PolyPoly.p * PolyPoly.p
+        assert_str(pp, "p**2")
+        assert pp.enhanced_type == (SingleVarPoly, IntegerPolyMath)
+        p = pp.eval(x + one)
+        assert p.enhanced_type == (SingleVarPoly, IntegerMath)
+        assert_str(p, "x**2+(2)*x+1")
+        assert p.eval(100) == 10201
 
     @run_test
     def check_PolyPoly_is_ring():
+        p = (x + one) * (x + three) * (x + one) + two
+        q = p.raised_to_exponent(3)
+
         samples = [
             PP([one, two, three]),
             PP([p, q, x, p, q, x]),

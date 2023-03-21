@@ -1,5 +1,6 @@
 from lib.type import enhanced_type
 
+
 def verify_homomorphism(samples, f, g, type1, type2):
     for a in samples:
         assert enhanced_type(a) == type1
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     from mod5 import Mod5
     from number_list import NumberList
     from poly import SingleVarPoly
-    from poly_integer import IntegerPoly
+    from poly_integer import IntegerMath, IntegerPoly
     from lib.test_helpers import run_test
 
     def get_digits(n):
@@ -113,7 +114,7 @@ if __name__ == "__main__":
             IntegerPoly.from_list([-47]),
             IntegerPoly.from_list([43, 0, 0, 0, 0, 27]),
         ]
-        type_a = (SingleVarPoly, int)
+        type_a = (SingleVarPoly, IntegerMath)
 
         samples_b = [
             NumberList([43, 97, 2]),
