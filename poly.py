@@ -6,10 +6,6 @@ from lib.type_enforcers import (
 )
 
 
-def arr_get(lst, i, zero):
-    return lst[i] if i < len(lst) else zero
-
-
 class SingleVarPoly:
     def __init__(self, math, lst, var_name):
         enforce_subtype(math, AbstractMath)
@@ -55,13 +51,15 @@ class SingleVarPoly:
         add = self.math.add
         lst1 = self.lst
         lst2 = other.lst
-        # do the analog of elementary school arithmetic
+
         new_size = max(len(lst1), len(lst2))
-        return SingleVarPoly(
-            self.math,
-            [add(arr_get(lst1, i, zero), arr_get(lst2, i, zero)) for i in range(new_size)],
-            self.var_name or other.var_name,
-        )
+        lst = [zero] * new_size
+        for i, x in enumerate(lst1):
+            lst[i] = add(lst[i], x)
+        for i, x in enumerate(lst2):
+            lst[i] = add(lst[i], x)
+        var_name = self.var_name or other.var_name
+        return SingleVarPoly(self.math, lst, var_name)
 
     def enforce_partner_type(self, other):
         assert type(other) == SingleVarPoly
