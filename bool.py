@@ -31,38 +31,9 @@ class Bool:
         return str(self.b)
 
 
-def verify_semiring(samples, *, zero, one):
-    # compare this to verify_axioms in commutative_ring.py
-    assert zero * zero == zero
-    assert zero * one == zero
-    assert one * zero == zero
-    assert one * one == one
-
-    assert zero + zero == zero
-    assert one + zero == one
-    assert zero + one == one
-
-    # This looks like overkill for Bool, but we want
-    # to verify the distributive properties across all
-    # possible 3-tuples of T and F.
-    for a in samples:
-        assert zero + a == a
-        assert a + zero == a
-        assert one * a == a
-        assert a * one == a
-
-        for b in samples:
-            assert a * b == b * a
-            assert a + b == b + a
-
-            for c in samples:
-                assert a * (b + c) == a * b + a * c
-                assert (a + b) + c == a + (b + c)
-                assert (a * b) * c == (a * b) * c
-
-
 if __name__ == "__main__":
     from lib.test_helpers import run_test
+    from semiring import verify_semiring
 
     F = Bool(False)
     T = Bool(True)
