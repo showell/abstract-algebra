@@ -1,4 +1,38 @@
-def verify_homomorphism(samples, f, g, type1, type2):
+def verify_mappability(samples, f, g, type1, type2):
+    # https://en.wikipedia.org/wiki/Homomorphism
+    # https://en.wikipedia.org/wiki/Surjective_function
+    # https://en.wikipedia.org/wiki/Injective_function
+    """
+    We are using a somewhat informal notion of homomorphism here,
+    which is essentially just saying that two different Python
+    types have a natural mapping between them.
+
+    We require both types to natively support the * and +
+    operators, whether they are just built-in concepts (as for
+    Python integers) or they are implemented with magic
+    dunder methods like __add__ and __mul__.
+
+    If we have samples of type type1, then we expect our f
+    function to map values of type type1 to "similar" values
+    of type type2. Note that we do NOT require this mapping to
+    be either surjective (onto) or injective (one-to-one).
+
+    Likewise the g function maps values back from type2 to type1.
+
+    We are verifying only that type2 is powerful enough to simulate
+    type1 math.  In other words, we decide whether you can take two
+    values from type1, then use f to map them over to type2 values,
+    and then do the +/* operation under type2, and then finally
+    use g to get back a value of type1, and find that the result is
+    the same as if you had done the same operation completely in
+    type1.
+
+    Unless we are dealing with small, finite sets, this function
+    does not exhaust all possible values, so you shouldn't
+    consider this function to provide a proof. It is useful
+    in that it will quickly find counterexamples if you choose
+    your sample values carefully.
+    """
     for a in samples:
         assert type(a) == type1
         assert type(f(a)) == type2
@@ -6,16 +40,16 @@ def verify_homomorphism(samples, f, g, type1, type2):
         assert g(f(a)) == a
 
         for exp in range(8):
-            assert g(f(a) ** exp) == g(f(a**exp))
+            assert g(f(a) ** exp) == a**exp
 
         for b in samples:
-            assert g(f(a) + f(b)) == g(f(a + b))
-            assert g(f(a) * f(b)) == g(f(a * b))
+            assert g(f(a) + f(b)) == a + b
+            assert g(f(a) * f(b)) == a * b
 
 
 def verify_isomorphism(*, samples_a, type_a, samples_b, type_b, a_to_b, b_to_a):
-    verify_homomorphism(samples_a, a_to_b, b_to_a, type_a, type_b)
-    verify_homomorphism(samples_b, b_to_a, a_to_b, type_b, type_a)
+    verify_mappability(samples_a, a_to_b, b_to_a, type_a, type_b)
+    verify_mappability(samples_b, b_to_a, a_to_b, type_b, type_a)
 
 
 if __name__ == "__main__":
@@ -43,7 +77,7 @@ if __name__ == "__main__":
         f = lambda integer: Fraction(integer)
         g = lambda fraction: int(fraction)
 
-        verify_homomorphism(samples, f, g, int, Fraction)
+        verify_mappability(samples, f, g, int, Fraction)
 
     @run_test
     def ints_can_compute_mod5():
@@ -51,7 +85,7 @@ if __name__ == "__main__":
         f = lambda m: m.n
         g = lambda n: Mod5(n % 5)
 
-        verify_homomorphism(samples, f, g, Mod5, int)
+        verify_mappability(samples, f, g, Mod5, int)
 
     @run_test
     def ints_can_compute_simple_bool_logic():
@@ -81,7 +115,7 @@ if __name__ == "__main__":
         assert f(F) * f(T) * f(T) == 0
         assert g(0) == F
 
-        verify_homomorphism(samples, f, g, Bool, int)
+        verify_mappability(samples, f, g, Bool, int)
 
     @run_test
     def NumberList_can_trivally_compute_int():
@@ -89,7 +123,7 @@ if __name__ == "__main__":
         f = lambda n: NumberList([n])
         g = lambda nl: nl.list()[0]
 
-        verify_homomorphism(samples, f, g, int, NumberList)
+        verify_mappability(samples, f, g, int, NumberList)
 
     @run_test
     def NumberList_can_simulate_decimal_digit_math():
@@ -102,7 +136,7 @@ if __name__ == "__main__":
         f = lambda n: NumberList(get_digits(n))
         g = lambda nl: number_from_digit_list(nl.list())
 
-        verify_homomorphism(samples, f, g, int, NumberList)
+        verify_mappability(samples, f, g, int, NumberList)
 
     @run_test
     def NumberList_and_IntegerPoly_are_isomorphic():
