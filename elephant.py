@@ -75,3 +75,7 @@ if __name__ == "__main__":
         minus_four = Elephant.additive_inverse(four)
         assert minus_four.val == -4
         assert minus_four.history == "(-4)"
+
+        twenty_four = Elephant.add(twenty, four)
+        assert twenty_four.val == 24
+        assert twenty_four.history == "((4 * 5) + 4)"
