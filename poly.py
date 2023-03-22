@@ -87,13 +87,6 @@ class SingleVarPoly:
         return len(self.lst) == 0
 
     def multiply_with(self, other):
-        """
-        We are mostly simulating high school arithmetic, but it is probably
-        more precise to say that we are creating a discrete convulution of
-        our two lists over the non-zero values.
-
-        https://en.wikipedia.org/wiki/Convolution#Discrete_convolution
-        """
         if other.is_zero():
             return other
 
