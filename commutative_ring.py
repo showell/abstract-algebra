@@ -15,11 +15,13 @@ def verify_commutative_monoid(samples, *, identity, combine):
             for c in samples:
                 assert combine(combine(a, b), c) == combine(a, combine(b, c))
 
+
 def verify_distributive_property(samples, *, zero, one):
     for a in samples:
         for b in samples:
             for c in samples:
                 assert a * (b + c) == a * b + a * c
+
 
 def verify_semiring(samples, *, zero, one):
     add = lambda a, b: a + b
@@ -28,10 +30,12 @@ def verify_semiring(samples, *, zero, one):
     verify_commutative_monoid(samples, identity=one, combine=mul)
     verify_distributive_property(samples, zero=zero, one=one)
 
+
 def verify_additive_inverses(samples, zero):
     for a in samples:
         assert a + (-a) == zero
         assert (-a) + a == zero
+
 
 def verify_axioms(samples, *, zero, one):
     assert len(samples) >= 2
