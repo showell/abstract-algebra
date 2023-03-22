@@ -44,14 +44,20 @@ A quick example of Abstract Algebra is that it gives a fancy name to a
 fairly elementary concept. If you have to add a bunch of numbers together, as
 long as you keep the numbers in order, it doesn't really matter how you group
 the operations.  This is due to the associate property.  In Abstract Algebra
-we say that integers combined with the addition operator just exemplify a
-specific example of a **monoid**.  
+we say that integers combined with the addition operator (and the "identity"
+element of 0) just exemplify a specific example of a **monoid**. (See
+https://en.wikipedia.org/wiki/Monoid for more detail.)
 
 Integers are more than just **monoidal over addition**.  The operations of
 **mulitplication** and **addition** are monoidal, **commutative**, and
 **distributive**.  And since we also have **additive inverses**, we call the
 set of integers, along with the familiar operations of addition and multiplication,
 a **commutative ring**.
+
+It turns out you make **rings** not only from integers, but also rational numbers,
+real numbers, and complex numbers.  But **rings** don't have to even be numbers
+in the traditional sense.  For example, you can form a ring from the set of
+polynomials, and that is what I mostly explore in this project.
 
 ## Touring the code ##
 
