@@ -52,13 +52,14 @@ class SingleVarPoly:
             return self
 
         zero = self.math.zero
+        add = self.math.add
         lst1 = self.lst
         lst2 = other.lst
         # do the analog of elementary school arithmetic
         new_size = max(len(lst1), len(lst2))
         return SingleVarPoly(
             self.math,
-            [arr_get(lst1, i, zero) + arr_get(lst2, i, zero) for i in range(new_size)],
+            [add(arr_get(lst1, i, zero), arr_get(lst2, i, zero)) for i in range(new_size)],
             self.var_name or other.var_name,
         )
 
