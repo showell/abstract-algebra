@@ -10,6 +10,9 @@ class Elephant:
         self.val = val
         self.history = history
 
+    def __str__(self):
+        return str(self.val)
+
     @staticmethod
     def add(elephant1, elephant2):
         enforce_type(elephant1, Elephant)
@@ -53,7 +56,7 @@ class Elephant:
 
 
 if __name__ == "__main__":
-    from lib.test_helpers import run_test
+    from lib.test_helpers import assert_str, run_test
 
     @run_test
     def basics():
@@ -63,10 +66,12 @@ if __name__ == "__main__":
         nine = Elephant.add(four, five)
         assert nine.val == 9
         assert nine.history == "(4 + 5)"
+        assert_str(nine, "9")
 
         twenty = Elephant.multiply(four, five)
         assert twenty.val == 20
         assert twenty.history == "(4 * 5)"
+        assert_str(twenty, "20")
 
         sixty_four = Elephant.power(four, 3)
         assert sixty_four.val == 64
