@@ -86,11 +86,6 @@ class SingleVarPoly:
     def is_zero(self):
         return len(self.lst) == 0
 
-    def multiply_by_constant(self, c, lst):
-        enforce_list_types(lst, self.math.value_type)
-        mul = self.math.multiply
-        return self.new([mul(c, elem) for elem in lst])
-
     def multiply_with(self, other):
         """
         We are mostly simulating high school arithmetic, but it is probably
@@ -106,15 +101,17 @@ class SingleVarPoly:
             return self
 
         zero = self.math.zero
+        add = self.math.add
+        mul = self.math.multiply
         lst1 = self.lst
         lst2 = other.lst
+        lst = [zero] * (len(lst1) + len(lst2) - 1)
+        for i, x in enumerate(lst1):
+            for j, y in enumerate(lst2):
+                lst[i + j] = add(lst[i + j], mul(x, y))
+
         var_name = self.var_name or other.var_name
-        # do the analog of elementary school arithmetic
-        result = SingleVarPoly(self.math, [], var_name)
-        for i, elem in enumerate(lst1):
-            if elem != zero:
-                result += self.multiply_by_constant(elem, [zero] * i + lst2)
-        return result
+        return SingleVarPoly(self.math, lst, var_name)
 
     def new(self, lst):
         return SingleVarPoly(self.math, lst, self.var_name)
