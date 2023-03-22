@@ -17,7 +17,6 @@ class Elephant:
         enforce_same_types(elephant1.val, elephant2.val)
 
         val = elephant1.val + elephant2.val
-        val = elephant1.val + elephant2.val
         history = f"({elephant1.history} + {elephant2.history})"
         return Elephant(val, history)
 
