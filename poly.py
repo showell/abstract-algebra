@@ -48,6 +48,9 @@ class SingleVarPoly:
         return self.new([additive_inverse(elem) for elem in lst])
 
     def add_with(self, other):
+        if other.is_zero():
+            return self
+
         zero = self.math.zero
         lst1 = self.lst
         lst2 = other.lst
@@ -77,6 +80,12 @@ class SingleVarPoly:
             result = add(result, term)
         return result
 
+    def is_one(self):
+        return len(self.lst) == 1 and self.lst[0] == self.math.one
+
+    def is_zero(self):
+        return len(self.lst) == 0
+
     def multiply_by_constant(self, c, lst):
         enforce_list_types(lst, self.math.value_type)
         mul = self.math.multiply
@@ -90,6 +99,12 @@ class SingleVarPoly:
 
         https://en.wikipedia.org/wiki/Convolution#Discrete_convolution
         """
+        if other.is_zero():
+            return other
+
+        if other.is_one():
+            return self
+
         zero = self.math.zero
         lst1 = self.lst
         lst2 = other.lst
@@ -97,7 +112,8 @@ class SingleVarPoly:
         # do the analog of elementary school arithmetic
         result = SingleVarPoly(self.math, [], var_name)
         for i, elem in enumerate(lst1):
-            result += self.multiply_by_constant(elem, [zero] * i + lst2)
+            if elem != zero:
+                result += self.multiply_by_constant(elem, [zero] * i + lst2)
         return result
 
     def new(self, lst):
