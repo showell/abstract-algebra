@@ -54,7 +54,7 @@ Integers are more than just **monoidal over addition**.  The operations of
 set of integers, along with the familiar operations of addition and multiplication,
 a **commutative ring**.
 
-It turns out you make **rings** not only from integers, but also rational numbers,
+It turns out you can make **rings** not only from integers, but also rational numbers,
 real numbers, and complex numbers.  But **rings** don't have to even be numbers
 in the traditional sense.  For example, you can form a ring from the set of
 polynomials, and that is what I mostly explore in this project.
