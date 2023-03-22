@@ -33,7 +33,7 @@ class Bool:
 
 if __name__ == "__main__":
     from lib.test_helpers import run_test
-    from semiring import verify_semiring
+    from commutative_ring import verify_semiring
 
     F = Bool(False)
     T = Bool(True)

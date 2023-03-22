@@ -4,6 +4,35 @@ a multiplicative identity element (which we call "one").
 """
 
 
+def verify_commutative_monoid(samples, *, identity, combine):
+    for a in samples:
+        assert combine(identity, a) == a
+        assert combine(a, identity) == a
+
+        for b in samples:
+            assert combine(a, b) == combine(b, a)
+
+            for c in samples:
+                assert combine(combine(a, b), c) == combine(a, combine(b, c))
+
+def verify_distributive_property(samples, *, zero, one):
+    for a in samples:
+        for b in samples:
+            for c in samples:
+                assert a * (b + c) == a * b + a * c
+
+def verify_semiring(samples, *, zero, one):
+    add = lambda a, b: a + b
+    mul = lambda a, b: a * b
+    verify_commutative_monoid(samples, identity=zero, combine=add)
+    verify_commutative_monoid(samples, identity=one, combine=mul)
+    verify_distributive_property(samples, zero=zero, one=one)
+
+def verify_additive_inverses(samples, zero):
+    for a in samples:
+        assert a + (-a) == zero
+        assert (-a) + a == zero
+
 def verify_axioms(samples, *, zero, one):
     assert len(samples) >= 2
 
@@ -14,32 +43,8 @@ def verify_axioms(samples, *, zero, one):
         for j in range(i + 1, len(samples)):
             assert samples[i] != samples[j]
 
-    assert zero * zero == zero
-    assert zero * one == zero
-    assert one * zero == zero
-    assert one * one == one
-
-    assert zero + zero == zero
-    assert one + zero == one
-    assert zero + one == one
-
-    for a in samples:
-        assert zero + a == a
-        assert a + zero == a
-        assert one * a == a
-        assert a * one == a
-        assert a + (-a) == zero
-        assert (-a) + a == zero
-
-        for b in samples:
-            assert a * b == b * a
-            assert a + b == b + a
-
-            for c in samples:
-                assert a * (b + c) == a * b + a * c
-                assert (b + c) * a == b * a + c * a
-                assert (a + b) + c == a + (b + c)
-                assert (a * b) * c == (a * b) * c
+    verify_semiring(samples, zero=zero, one=one)
+    verify_additive_inverses(samples, zero)
 
 
 if __name__ == "__main__":
