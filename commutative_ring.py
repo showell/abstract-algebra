@@ -74,3 +74,13 @@ if __name__ == "__main__":
     def check_fractions_are_ring():
         samples = [Fraction(1, 3), Fraction(-2, 7), Fraction(43, 13)]
         verify_axioms(samples, zero=Fraction(0), one=Fraction(1))
+
+    @run_test
+    def verify_python_lists_form_a_monoid():
+        samples = [
+            [1, 2, 3],
+            [99, 42, -7],
+            ["whatever"],
+        ]
+        concat = lambda lst1, lst2: lst1 + lst2
+        verify_monoid(samples, identity=[], combine=concat)
