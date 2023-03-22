@@ -2,6 +2,7 @@ class Elephant:
     """
     An Elephant object remembers how it was created.
     """
+
     def __init__(self, val, history):
         self.val = val
         self.history = history
@@ -13,9 +14,9 @@ class Elephant:
         return Elephant(val, history)
 
     @staticmethod
-    def multiply(elephant1, elephant2):
-        val = elephant1.val * elephant2.val
-        history = f"({elephant1.history} * {elephant2.history})"
+    def additive_inverse(elephant):
+        val = -elephant.val
+        history = f"(-{elephant.history})"
         return Elephant(val, history)
 
     @staticmethod
@@ -23,10 +24,17 @@ class Elephant:
         return Elephant(val, str(val))
 
     @staticmethod
+    def multiply(elephant1, elephant2):
+        val = elephant1.val * elephant2.val
+        history = f"({elephant1.history} * {elephant2.history})"
+        return Elephant(val, history)
+
+    @staticmethod
     def power(elephant, exp):
-        val = elephant.val ** exp
+        val = elephant.val**exp
         history = f"({elephant.history})**{exp}"
         return Elephant(val, history)
+
 
 if __name__ == "__main__":
     from lib.test_helpers import run_test
@@ -47,3 +55,7 @@ if __name__ == "__main__":
         sixty_four = Elephant.power(four, 3)
         assert sixty_four.val == 64
         assert sixty_four.history == "(4)**3"
+
+        minus_four = Elephant.additive_inverse(four)
+        assert minus_four.val == -4
+        assert minus_four.history == "(-4)"
