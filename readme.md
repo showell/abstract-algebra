@@ -10,4 +10,4 @@ The main concepts here are the following:
 * dynamic type checking
 * unit testing
 
-The best place to start reading is [commutative_ring.py](./blob/main/commutative_ring.py).
+The best place to start reading is [commutative_ring.py](./commutative_ring.py).
