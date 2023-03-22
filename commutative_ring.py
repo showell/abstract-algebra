@@ -4,16 +4,23 @@ a multiplicative identity element (which we call "one").
 """
 
 
-def verify_commutative_monoid(samples, *, identity, combine):
+def verify_commutative(samples, combine):
     for a in samples:
-        assert combine(identity, a) == a
-        assert combine(a, identity) == a
-
         for b in samples:
             assert combine(a, b) == combine(b, a)
 
+
+def verify_monoid(samples, *, identity, combine):
+    for a in samples:
+        assert combine(identity, a) == a
+        for b in samples:
             for c in samples:
                 assert combine(combine(a, b), c) == combine(a, combine(b, c))
+
+
+def verify_commutative_monoid(samples, *, identity, combine):
+    verify_commutative(samples + [identity], combine)
+    verify_monoid(samples, identity=identity, combine=combine)
 
 
 def verify_distributive_property(samples, *, zero, one):
@@ -37,7 +44,7 @@ def verify_additive_inverses(samples, zero):
         assert (-a) + a == zero
 
 
-def verify_axioms(samples, *, zero, one):
+def ensure_samples_are_useful(samples):
     assert len(samples) >= 2
 
     # Make sure our samples are different from each
@@ -47,6 +54,9 @@ def verify_axioms(samples, *, zero, one):
         for j in range(i + 1, len(samples)):
             assert samples[i] != samples[j]
 
+
+def verify_axioms(samples, *, zero, one):
+    ensure_samples_are_useful(samples)
     verify_semiring(samples, zero=zero, one=one)
     verify_additive_inverses(samples, zero)
 
