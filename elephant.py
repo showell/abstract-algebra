@@ -1,3 +1,6 @@
+from lib.type_enforcers import enforce_same_types, enforce_type
+
+
 class Elephant:
     """
     An Elephant object remembers how it was created.
@@ -9,12 +12,19 @@ class Elephant:
 
     @staticmethod
     def add(elephant1, elephant2):
+        enforce_type(elephant1, Elephant)
+        enforce_type(elephant2, Elephant)
+        enforce_same_types(elephant1.val, elephant2.val)
+
+        val = elephant1.val + elephant2.val
         val = elephant1.val + elephant2.val
         history = f"({elephant1.history} + {elephant2.history})"
         return Elephant(val, history)
 
     @staticmethod
     def additive_inverse(elephant):
+        enforce_type(elephant, Elephant)
+
         val = -elephant.val
         history = f"(-{elephant.history})"
         return Elephant(val, history)
@@ -25,12 +35,19 @@ class Elephant:
 
     @staticmethod
     def multiply(elephant1, elephant2):
+        enforce_type(elephant1, Elephant)
+        enforce_type(elephant2, Elephant)
+        enforce_same_types(elephant1.val, elephant2.val)
+
         val = elephant1.val * elephant2.val
         history = f"({elephant1.history} * {elephant2.history})"
         return Elephant(val, history)
 
     @staticmethod
     def power(elephant, exp):
+        enforce_type(elephant, Elephant)
+        enforce_type(exp, int)
+
         val = elephant.val**exp
         history = f"({elephant.history})**{exp}"
         return Elephant(val, history)
