@@ -5,12 +5,14 @@ a multiplicative identity element (which we call "one").
 
 
 def verify_commutative(samples, combine):
+    # https://en.wikipedia.org/wiki/Commutative_property
     for a in samples:
         for b in samples:
             assert combine(a, b) == combine(b, a)
 
 
 def verify_monoid(samples, *, identity, combine):
+    # https://en.wikipedia.org/wiki/Monoid
     for a in samples:
         assert combine(identity, a) == a
         for b in samples:
@@ -24,6 +26,7 @@ def verify_commutative_monoid(samples, *, identity, combine):
 
 
 def verify_distributive_property(samples, *, zero, one):
+    # https://en.wikipedia.org/wiki/Distributive_property
     for a in samples:
         for b in samples:
             for c in samples:
@@ -31,6 +34,7 @@ def verify_distributive_property(samples, *, zero, one):
 
 
 def verify_semiring(samples, *, zero, one):
+    # https://en.wikipedia.org/wiki/Semiring
     add = lambda a, b: a + b
     mul = lambda a, b: a * b
     verify_commutative_monoid(samples, identity=zero, combine=add)
@@ -39,6 +43,7 @@ def verify_semiring(samples, *, zero, one):
 
 
 def verify_additive_inverses(samples, zero):
+    # https://en.wikipedia.org/wiki/Additive_inverse
     for a in samples:
         assert a + (-a) == zero
         assert (-a) + a == zero
@@ -56,6 +61,7 @@ def ensure_samples_are_useful(samples):
 
 
 def verify_axioms(samples, *, zero, one):
+    # https://en.wikipedia.org/wiki/Commutative_ring
     ensure_samples_are_useful(samples)
     verify_semiring(samples, zero=zero, one=one)
     verify_additive_inverses(samples, zero)
