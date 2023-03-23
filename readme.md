@@ -62,3 +62,18 @@ polynomials, and that is what I mostly explore in this project.
 ## Touring the code ##
 
 The best place to start reading is [commutative_ring.py](./commutative_ring.py).
+In that file we create checkers for various mathematical properties such
+as the associate property (i.e monoids), the commutative property (aka symmetry),
+the distributive property, and the existence of additive inverses.  When all
+such properties are satisfied over a representative sample of values, you can
+have some confidence that a Python value type acts as a **commutative ring**.
+
+The next files to look at are [mod5.py](./mod5.py) and [pair.py](./pair.py),
+which both implement relatively simple Python classes whose values satisfy
+the properties of a ring.
+
+Next look at [bool.py](./bool.py), which serves as interesting counterexample
+to most of our other classes.  We construct a Bool class that does not have
+an additive inverse, so it does not qualify to be a ring. Instead, it is only
+a semiring.  Nonetheless, despite it not having an additive inverse, it does
+play nice with other data types in certain situations.
