@@ -96,6 +96,7 @@ polynomials with Python:
 * [poly_elephant.py](./poly_elephant.py)
 * [poly_integer.py](./poly_integer.py)
 * [poly_mod5.py](./poly_mod5.py)
+* [poly_pair.py](./poly_pair.py)
 * [poly_poly.py](./poly_poly.py)
 * [poly_poly_poly.py](./poly_poly_poly.py)
 
