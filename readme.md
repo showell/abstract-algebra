@@ -11,6 +11,20 @@ The main concepts here are the following:
 * dynamic type checking
 * unit testing
 
+## Dunder methods ##
+
+We use the following "dunder" methods in Python.  "Dunder" is short
+for double-underscore, and "dunder methods" are basically special
+methods in Python.
+
+* `__add__`: allow `a + b` syntax
+* `__eq__`: allow `a == b` syntax
+* `__mul__`: allow `a * b` syntax
+* `__neg__` allow `-a` syntax
+* `__pow__` allow `a ** exp` syntax
+
+See https://docs.python.org/3/library/operator.html for more details.
+
 ## Crash course in Abstract Algebra ##
 
 If you already know what a "commutative ring" means in Abstract Algebra,
