@@ -60,7 +60,7 @@ def ensure_samples_are_useful(samples):
             assert samples[i] != samples[j]
 
 
-def verify_axioms(samples, *, zero, one):
+def verify_ring_properties(samples, *, zero, one):
     # https://en.wikipedia.org/wiki/Commutative_ring
     ensure_samples_are_useful(samples)
     verify_semiring(samples, zero=zero, one=one)
@@ -74,12 +74,12 @@ if __name__ == "__main__":
     @run_test
     def check_integers_are_ring():
         samples = [-7, 42, 13, 9, 4567, 14]
-        verify_axioms(samples, zero=0, one=1)
+        verify_ring_properties(samples, zero=0, one=1)
 
     @run_test
     def check_fractions_are_ring():
         samples = [Fraction(1, 3), Fraction(-2, 7), Fraction(43, 13)]
-        verify_axioms(samples, zero=Fraction(0), one=Fraction(1))
+        verify_ring_properties(samples, zero=Fraction(0), one=Fraction(1))
 
     @run_test
     def verify_python_lists_form_a_monoid():

@@ -23,7 +23,7 @@ class PolyPolyPoly:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_str, run_test
 
     IP = IntegerPoly.from_list
@@ -83,4 +83,4 @@ if __name__ == "__main__":
             PPP([pp_b]),
         ]
 
-        verify_axioms(samples, zero=PolyPolyPoly.zero, one=PolyPolyPoly.one)
+        verify_ring_properties(samples, zero=PolyPolyPoly.zero, one=PolyPolyPoly.one)

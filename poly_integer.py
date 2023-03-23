@@ -18,7 +18,7 @@ class IntegerPoly:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_str, run_test
 
     IP = IntegerPoly.from_list
@@ -43,7 +43,7 @@ if __name__ == "__main__":
             IP([103, 8256523499]),
         ]
 
-        verify_axioms(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
+        verify_ring_properties(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
 
     zero = IntegerPoly.zero
     one = IntegerPoly.one

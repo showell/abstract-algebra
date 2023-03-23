@@ -20,7 +20,7 @@ class PolyPoly:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_str, run_test
 
     PP = PolyPoly.from_list
@@ -62,4 +62,4 @@ if __name__ == "__main__":
             PP([x + one, x + two, p + three]),
         ]
 
-        verify_axioms(samples, zero=PolyPoly.zero, one=PolyPoly.one)
+        verify_ring_properties(samples, zero=PolyPoly.zero, one=PolyPoly.one)

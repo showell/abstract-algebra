@@ -21,7 +21,7 @@ class Mod5Poly:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_str, run_test
 
     zero = Mod5Math.zero
@@ -53,4 +53,4 @@ if __name__ == "__main__":
             (p_m * p_two) + p_one,
             (p_m + p_three).raised_to_exponent(15),
         ]
-        verify_axioms(poly_samples, zero=p_zero, one=p_one)
+        verify_ring_properties(poly_samples, zero=p_zero, one=p_one)

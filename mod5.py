@@ -45,7 +45,7 @@ class Mod5:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import run_test
 
     zero = Mod5(0)
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             four,
         ]
 
-        verify_axioms(samples, zero=zero, one=one)
+        verify_ring_properties(samples, zero=zero, one=one)
 
     @run_test
     def verify_exponentiation():

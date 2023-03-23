@@ -35,7 +35,7 @@ class ElephantIntegerPoly:
 
 
 if __name__ == "__main__":
-    from commutative_ring import verify_axioms
+    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_str, run_test
 
     @run_test
@@ -65,7 +65,7 @@ if __name__ == "__main__":
             two * three,
         ]
 
-        verify_axioms(
+        verify_ring_properties(
             samples,
             zero=ElephantIntegerPoly.zero,
             one=ElephantIntegerPoly.one,
