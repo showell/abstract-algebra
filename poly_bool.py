@@ -40,7 +40,7 @@ class BoolPoly:
 
 
 if __name__ == "__main__":
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     @run_test
     def show_relation_to_ints():
@@ -55,6 +55,8 @@ if __name__ == "__main__":
         assert x == b**0 + b**2 + b**4 + b**6
         assert y == b**3
         assert z == b**4
+
+        assert_equal(b.type_string, "SingleVarPoly.Bool")
 
         p = x * y * z
         assert_str(p, "p**13+p**11+p**9+p**7")

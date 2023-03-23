@@ -6,6 +6,10 @@ class AbstractMath:
         self.value_type = value_type
         self.zero = zero
         self.one = one
+        if hasattr(zero, "type_string"):
+            self.type_string = zero.type_string
+        else:
+            self.type_string = value_type.__name__
 
     def add(self, a, b):
         enforce_type(a, self.value_type)

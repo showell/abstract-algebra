@@ -21,7 +21,7 @@ class PolyPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     PP = PolyPoly.from_list
 
@@ -42,6 +42,8 @@ if __name__ == "__main__":
         assert_str(pp.eval(x * x * x + three), "x**7+(6)*x**4+(2)*x**3+(9)*x+7")
 
         assert_str(pp * pp, "(x**2)*p**4+((4)*x)*p**3+((2)*x+4)*p**2+(4)*p+1")
+
+        assert_equal(pp.type_string, "SingleVarPoly.SingleVarPoly.int")
 
     @run_test
     def check_eval():

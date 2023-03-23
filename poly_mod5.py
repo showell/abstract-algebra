@@ -22,7 +22,7 @@ class Mod5Poly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     zero = Mod5Math.zero
     one = Mod5Math.one
@@ -42,6 +42,7 @@ if __name__ == "__main__":
         q = (p_m + p_four) * (p_m + p_three)
         assert_str(q, "m**2+(2)*m+2")
         assert q.eval(four) == one
+        assert_equal(q.type_string, "SingleVarPoly.Mod5")
 
     @run_test
     def mod5_polys_conform_to_axioms():

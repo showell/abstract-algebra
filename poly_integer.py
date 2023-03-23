@@ -19,7 +19,7 @@ class IntegerPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     IP = IntegerPoly.from_list
 
@@ -61,6 +61,7 @@ if __name__ == "__main__":
         assert_str(IP([1, 2, 3, 4]), "(4)*x**3+(3)*x**2+(2)*x+1")
 
     p = (x + one) * (x + three) * (x + one) + two
+    assert_equal(p.type_string, "SingleVarPoly.int")
 
     @run_test
     def check_eval():

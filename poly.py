@@ -15,6 +15,9 @@ class SingleVarPoly:
         self.lst = lst
         self.math = math
         self.var_name = var_name
+        assert hasattr(math, "type_string")
+        enforce_type(math.type_string, str)
+        self.type_string = f"SingleVarPoly.{math.type_string}"
         self.simplify()
 
     def __add__(self, other):

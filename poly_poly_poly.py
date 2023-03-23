@@ -24,7 +24,7 @@ class PolyPolyPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     IP = IntegerPoly.from_list
     PP = PolyPoly.from_list
@@ -48,6 +48,7 @@ if __name__ == "__main__":
     )
 
     ppp_a = PPP([pp_a, pp_c])
+    assert_equal(ppp_a.type_string, "SingleVarPoly.SingleVarPoly.SingleVarPoly.int")
 
     assert_str(
         ppp_a,

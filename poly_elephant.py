@@ -12,6 +12,7 @@ class ElephantMath(AbstractMath):
         self.additive_inverse = Elephant.additive_inverse
         self.multiply = Elephant.multiply
         self.power = Elephant.power
+        self.type_string = "Elephant"
 
 
 ElephantIntegerMath = ElephantMath(
@@ -36,11 +37,13 @@ class ElephantIntegerPoly:
 
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
-    from lib.test_helpers import assert_str, run_test
+    from lib.test_helpers import assert_equal, assert_str, run_test
 
     @run_test
     def test_basics():
         x = ElephantIntegerPoly.x
+        assert_equal(x.type_string, "SingleVarPoly.Elephant")
+
         two = ElephantIntegerPoly.const(2)
         three = ElephantIntegerPoly.const(3)
         p = (x + two) * (x + three)
