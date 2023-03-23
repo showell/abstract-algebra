@@ -40,8 +40,8 @@ or "anything plus 0 just gives the same thing" or "3 + (7 + 20) == (3 + 7) + 20"
 Most of us learn these properties some time during our early schooling:
 
 * commutative property (aka **symmetry**): `a * b = b * a` (e.g. `5 * 2 == 2 * 5`)
-* associative property: `a + (b + c) == (a + b) + c` (e.g. (1 + 2) + 3 == 1 + (2 + 3)) 
-* distributive property: `a * (b + c) == a * b + a * c`
+* associative property: `a + (b + c) == (a + b) + c` (e.g. `(1 + 2) + 3 == 1 + (2 + 3)`) 
+* distributive property: `a * (b + c) == a * b + a * c` (e.g `4 * (10 + 2) == 4 * 10 + 4 * 2`)
 
 After we observe a bunch of concrete facts like `3 + 4 == 4 + 3` and `50 + 1 == 1 + 50`,
 we can appreciate the concepts on a more abstract level.  Algebra give us our
