@@ -23,9 +23,8 @@ methods in Python.
 * `__neg__` allow `-a` syntax
 * `__pow__` allow `a ** exp` syntax
 
-See these links for more detail:
-* https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types
-* https://docs.python.org/3/library/operator.html
+See https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types
+for more detail.
 
 ## Crash course in Abstract Algebra ##
 
@@ -38,10 +37,9 @@ Most of us learn basic integer arithmetic when we are fairly young.
 We soon develop "number sense" after noticing that "9 + 7 == 7 + 9"
 or "anything plus 0 just gives the same thing" or "3 + (7 + 20) == (3 + 7) + 20".
 
-I can't remember which grade you learn this in, and it probably varies across
-school systems, but most of us learn these properties some time during K-12:
+Most of us learn these properties some time during our early schooling:
 
-* commutative property: `a * b = b * a` (e.g. 5 * 2 == 2 * 5)
+* commutative property (aka **symmetry**): `a * b = b * a` (e.g. `5 * 2 == 2 * 5`)
 * associative property: `a + (b + c) == (a + b) + c` (e.g. (1 + 2) + 3 == 1 + (2 + 3)) 
 * distributive property: `a * (b + c) == a * b + a * c`
 
