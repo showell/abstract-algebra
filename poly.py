@@ -102,11 +102,19 @@ class SingleVarPoly:
             return self
 
         zero = self.math.zero
-        add = self.math.add
         mul = self.math.multiply
         lst1 = self.lst
         lst2 = other.lst
         lst = [zero] * (len(lst1) + len(lst2) - 1)
+
+        def add(x, y):
+            if x == zero:
+                return y
+            elif y == zero:
+                return x
+            else:
+                return self.math.add(x, y)
+
         for i, x in enumerate(lst1):
             for j, y in enumerate(lst2):
                 xy = mul(x, y)
