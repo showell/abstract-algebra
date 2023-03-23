@@ -62,8 +62,8 @@ we say that integers combined with the addition operator (and the "identity"
 element of 0) just exemplify a specific example of a **monoid**. (See
 https://en.wikipedia.org/wiki/Monoid for more detail.)
 
-Integers are more than just **monoidal over addition**.  The operations of
-**mulitplication** and **addition** are monoidal, **commutative**, and
+Integers are more than just **monoidal for addition**. They are also **monoidal for multiplication** (`4 * (5 * 6) == `(4 * 5) * 6`).  The operations of
+**mulitplication** and **addition** for integers are also **commutative**, and
 **distributive**.  And since we also have **additive inverses**, we call the
 set of integers, along with the familiar operations of addition and multiplication,
 a **commutative ring**.
