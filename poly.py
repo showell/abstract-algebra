@@ -50,21 +50,18 @@ class SingleVarPoly:
         zero = self.math.zero
         lst1 = self.lst
         lst2 = other.lst
+        add = self.math.add
 
-        def add(x, y):
-            if x == zero:
-                return y
-            elif y == zero:
-                return x
-            else:
-                return self.math.add(x, y)
+        if len(lst1) < len(lst2):
+            (lst2, lst1) = (lst1, lst2)
 
-        new_size = max(len(lst1), len(lst2))
-        lst = [zero] * new_size
-        for i, x in enumerate(lst1):
-            lst[i] = add(lst[i], x)
+        lst = lst1[:]
         for i, x in enumerate(lst2):
-            lst[i] = add(lst[i], x)
+            if x != zero:
+                if lst[i] == zero:
+                    lst[i] = x
+                else:
+                    lst[i] = add(lst[i], x)
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
 
