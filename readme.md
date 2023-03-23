@@ -23,7 +23,9 @@ methods in Python.
 * `__neg__` allow `-a` syntax
 * `__pow__` allow `a ** exp` syntax
 
-See https://docs.python.org/3/library/operator.html for more details.
+See these links for more detail:
+* https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types
+* https://docs.python.org/3/library/operator.html
 
 ## Crash course in Abstract Algebra ##
 
