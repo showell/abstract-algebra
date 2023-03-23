@@ -55,9 +55,11 @@ class SingleVarPoly:
         new_size = max(len(lst1), len(lst2))
         lst = [zero] * new_size
         for i, x in enumerate(lst1):
-            lst[i] = add(lst[i], x)
+            if x != zero:
+                lst[i] = add(lst[i], x)
         for i, x in enumerate(lst2):
-            lst[i] = add(lst[i], x)
+            if x != zero:
+                lst[i] = add(lst[i], x)
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
 
@@ -71,12 +73,14 @@ class SingleVarPoly:
     def eval(self, x):
         add = self.math.add
         mul = self.math.multiply
+        zero = self.math.zero
         power = lambda degree: self.math.power(x, degree)
 
         result = self.math.zero
         for degree, coeff in enumerate(self.lst):
-            term = mul(coeff, power(degree))
-            result = add(result, term)
+            if coeff != zero:
+                term = mul(coeff, power(degree))
+                result = add(result, term)
         return result
 
     def is_one(self):
@@ -100,7 +104,8 @@ class SingleVarPoly:
         lst = [zero] * (len(lst1) + len(lst2) - 1)
         for i, x in enumerate(lst1):
             for j, y in enumerate(lst2):
-                lst[i + j] = add(lst[i + j], mul(x, y))
+                if x != zero or y != zero:
+                    lst[i + j] = add(lst[i + j], mul(x, y))
 
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
