@@ -62,7 +62,7 @@ we say that integers combined with the addition operator (and the "identity"
 element of 0) just exemplify a specific example of a **monoid**. (See
 https://en.wikipedia.org/wiki/Monoid for more detail.)
 
-Integers are more than just **monoidal for addition**. They are also **monoidal for multiplication** (`4 * (5 * 6) == `(4 * 5) * 6`).  The operations of
+Integers are more than just **monoidal for addition**. They are also **monoidal for multiplication** (`4 * (5 * 6) == (4 * 5) * 6`).  The operations of
 **mulitplication** and **addition** for integers are also **commutative**, and
 **distributive**.  And since we also have **additive inverses**, we call the
 set of integers, along with the familiar operations of addition and multiplication,
@@ -77,8 +77,9 @@ polynomials, and that is what I mostly explore in this project.
 
 The best place to start reading is [commutative_ring.py](./commutative_ring.py).
 That file constains verifier functions for various mathematical properties such
-as the associate property (i.e monoids), the commutative property (aka symmetry),
-the distributive property, and the existence of additive inverses.  When all
+as the **associate property** (i.e. monoids),
+the **commutative property** (aka symmetry),
+the **distributive property**, and the existence of **additive inverses**.  When all
 such properties are satisfied over a representative sample of values, you can
 have some confidence that a Python value type acts as a **commutative ring**.
 
