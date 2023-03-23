@@ -25,11 +25,11 @@ or "anything plus 0 just gives the same thing" or "3 + (7 + 20) == (3 + 7) + 20"
 I can't remember which grade you learn this in, and it probably varies across
 school systems, but most of us learn these properties some time during K-12:
 
-* commutative property: a * b = b * a (e.g. 5 * 2 == 2 * 5)
-* associative property: a + (b + c) == (a + b) + c (e.g. (1 + 2) + 3 == 1 + (2 + 3)) 
-* distributive property: a * (b + c) == a * b + a * c
+* commutative property: `a * b = b * a` (e.g. 5 * 2 == 2 * 5)
+* associative property: `a + (b + c) == (a + b) + c` (e.g. (1 + 2) + 3 == 1 + (2 + 3)) 
+* distributive property: `a * (b + c) == a * b + a * c`
 
-After we observe a bunch of concrete facts like 3 + 4 == 4 + 3 and 50 + 1 == 1 + 50,
+After we observe a bunch of concrete facts like `3 + 4 == 4 + 3` and `50 + 1 == 1 + 50`,
 we can appreciate the concepts on a more abstract level.  Algebra give us our
 first real taste of abstraction in our math education, as we start stating facts
 like "a + b == b + a for all a, b belonging to the class of integers".
@@ -74,13 +74,14 @@ the properties of a ring. Both of these classes use dunder methods such
 as `__add__` and `__mul__` to support natural mathematical manipulation.
 
 And then there is [elephant.py](./elephant.py), which has the property that
-it remembers how its values are constructed. Despite its lack of dunder methods,
-we will show that it can be adapted to work with our polynomial class.
+it remembers how its values are constructed. Despite its lack of dunder methods
+for `__add__` and `__mul__`, we will show that it can be adapted to work
+with our polynomial class.
 
 Next look at [bool.py](./bool.py), which serves as interesting counterexample
 to most of our other classes.  We construct a Bool class that does not have
 an additive inverse, so it does not qualify to be a ring. Instead, it is only
-a semiring.  Nonetheless, despite it not having an additive inverse, it does
+a **semiring**.  Nonetheless, despite `Bool` not having an additive inverse, it does
 play nice with other data types in certain situations.
 
 All of these classes are just a warmup for the main event.
@@ -108,5 +109,5 @@ multiplication, as well as a few other things like the additive identity
 All of the other `poly*.py` modules follow a fairly similar pattern:
 
 * They create a subclass of `AbstractType`.
-* They create a small `FooPoly` wrapper class.
+* They create a small wrapper class such as `BoolPoly` or `IntegerPoly`.
 * They run some unit tests.
