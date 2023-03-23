@@ -104,8 +104,9 @@ class SingleVarPoly:
         lst = [zero] * (len(lst1) + len(lst2) - 1)
         for i, x in enumerate(lst1):
             for j, y in enumerate(lst2):
-                if x != zero or y != zero:
-                    lst[i + j] = add(lst[i + j], mul(x, y))
+                xy = mul(x, y)
+                if xy != zero:
+                    lst[i + j] = add(lst[i + j], xy)
 
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
