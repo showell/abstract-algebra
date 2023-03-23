@@ -59,7 +59,7 @@ real numbers, and complex numbers.  But **rings** don't have to even be numbers
 in the traditional sense.  For example, you can form a ring from the set of
 polynomials, and that is what I mostly explore in this project.
 
-## Touring the code ##
+## Touring the code (warmup) ##
 
 The best place to start reading is [commutative_ring.py](./commutative_ring.py).
 In that file we create checkers for various mathematical properties such
@@ -70,10 +70,30 @@ have some confidence that a Python value type acts as a **commutative ring**.
 
 The next files to look at are [mod5.py](./mod5.py) and [pair.py](./pair.py),
 which both implement relatively simple Python classes whose values satisfy
-the properties of a ring.
+the properties of a ring. Both of these classes use dunder methods such
+as `__add__` and `__mul__` to support natural mathematical manipulation.
+
+And then there is [elephant.py](./elephant.py), which has the property that
+it remembers how its values are constructed. Despite its lack of dunder elements,
+we will show that it can be adapted to work with our polynomial class.
 
 Next look at [bool.py](./bool.py), which serves as interesting counterexample
 to most of our other classes.  We construct a Bool class that does not have
 an additive inverse, so it does not qualify to be a ring. Instead, it is only
 a semiring.  Nonetheless, despite it not having an additive inverse, it does
 play nice with other data types in certain situations.
+
+All of these classes are just a warmup for the main event.
+
+## Polynomial classes
+
+This project has several modules that allow you to construct and evaluate
+polynomials with Python:
+
+* [poly.py](./poly.py)
+* [poly_bool.py](.poly_bool.py)
+* [poly_elephant.py](./poly_elephant.py)
+* [poly_integer.py](./poly_integer.py)
+* [poly_mod5.py](./poly_mod5.py)
+* [poly_poly.py](./poly_poly.py)
+* [poly_poly_poly.py](./poly_poly_poly.py)
