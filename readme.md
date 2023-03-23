@@ -40,10 +40,10 @@ about the properties of numbers. And you actually get more abstract than simply
 thinking about numbers--things that may not obviously look like numbers on the
 surface may share properties with numbers.
 
-A quick example of Abstract Algebra is that it gives a fancy name to a
+A quick example of Abstract Algebra is that it gives a fancy name (**monoid**) to a
 fairly elementary concept. If you have to add a bunch of numbers together, as
 long as you keep the numbers in order, it doesn't really matter how you group
-the operations.  This is due to the associate property.  In Abstract Algebra
+the operations.  This is due to the **associate property**.  In Abstract Algebra
 we say that integers combined with the addition operator (and the "identity"
 element of 0) just exemplify a specific example of a **monoid**. (See
 https://en.wikipedia.org/wiki/Monoid for more detail.)
@@ -62,7 +62,7 @@ polynomials, and that is what I mostly explore in this project.
 ## Touring the code (warmup) ##
 
 The best place to start reading is [commutative_ring.py](./commutative_ring.py).
-In that file we create checkers for various mathematical properties such
+That file constains verifier functions for various mathematical properties such
 as the associate property (i.e monoids), the commutative property (aka symmetry),
 the distributive property, and the existence of additive inverses.  When all
 such properties are satisfied over a representative sample of values, you can
@@ -100,7 +100,7 @@ polynomials with Python:
 * [poly_poly_poly.py](./poly_poly_poly.py)
 
 The key module here is [poly.py](./poly.py), which implements a class
-called `SingleVarPoly`. It computes polynomials using **symbolic notation**,
+called `SingleVarPoly`. It computes polynomials using **symbolic manipulation**,
 and it uses **arbitrary math systems** to handle coefficients and values.
 It relies on an `AbstractMath` object to provide methods for addition,
 multiplication, as well as a few other things like the additive identity
