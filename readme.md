@@ -74,7 +74,7 @@ the properties of a ring. Both of these classes use dunder methods such
 as `__add__` and `__mul__` to support natural mathematical manipulation.
 
 And then there is [elephant.py](./elephant.py), which has the property that
-it remembers how its values are constructed. Despite its lack of dunder elements,
+it remembers how its values are constructed. Despite its lack of dunder methods,
 we will show that it can be adapted to work with our polynomial class.
 
 Next look at [bool.py](./bool.py), which serves as interesting counterexample
@@ -91,9 +91,22 @@ This project has several modules that allow you to construct and evaluate
 polynomials with Python:
 
 * [poly.py](./poly.py)
-* [poly_bool.py](.poly_bool.py)
+* [poly_bool.py](./poly_bool.py)
 * [poly_elephant.py](./poly_elephant.py)
 * [poly_integer.py](./poly_integer.py)
 * [poly_mod5.py](./poly_mod5.py)
 * [poly_poly.py](./poly_poly.py)
 * [poly_poly_poly.py](./poly_poly_poly.py)
+
+The key module here is [poly.py](./poly.py), which implements a class
+called `SingleVarPoly`. It computes polynomials using **symbolic notation**,
+and it uses **arbitrary math systems** to handle coefficients and values.
+It relies on an `AbstractMath` object to provide methods for addition,
+multiplication, as well as a few other things like the additive identity
+(zero) and multiplicative identity.
+
+All of the other `poly*.py` modules follow a fairly similar pattern:
+
+* They create a subclass of `AbstractType`.
+* They create a small `FooPoly` wrapper class.
+* They run some unit tests.
