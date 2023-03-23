@@ -111,3 +111,17 @@ All of the other `poly*.py` modules follow a fairly similar pattern:
 * They create a subclass of `AbstractType`.
 * They create a small wrapper class such as `BoolPoly` or `IntegerPoly`.
 * They run some unit tests.
+
+### Wikipedia links ###
+
+* https://en.wikipedia.org/wiki/Additive_inverse
+* https://en.wikipedia.org/wiki/Commutative_property
+* https://en.wikipedia.org/wiki/Commutative_ring
+* https://en.wikipedia.org/wiki/Distributive_property
+* https://en.wikipedia.org/wiki/Homomorphism
+* https://en.wikipedia.org/wiki/Injective_function
+* https://en.wikipedia.org/wiki/Isomorphism
+* https://en.wikipedia.org/wiki/Monoid
+* https://en.wikipedia.org/wiki/Root_of_unity_modulo_n
+* https://en.wikipedia.org/wiki/Semiring
+* https://en.wikipedia.org/wiki/Surjective_function
