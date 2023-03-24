@@ -5,10 +5,26 @@ from lib.type_enforcers import (
     enforce_type,
 )
 
+def enforce_math_type(math):
+    assert hasattr(math, "add")
+    assert hasattr(math, "additive_inverse")
+    assert hasattr(math, "multiply")
+    assert hasattr(math, "one")
+    assert hasattr(math, "power")
+    assert hasattr(math, "type_string")
+    assert hasattr(math, "value_type")
+    assert hasattr(math, "zero")
+    assert callable(math.add)
+    assert callable(math.additive_inverse)
+    assert callable(math.multiply)
+    assert callable(math.power)
+    enforce_type(math.zero, math.value_type)
+    enforce_type(math.one, math.value_type)
+    enforce_type(math.type_string, str)
 
 class SingleVarPoly:
     def __init__(self, math, lst, var_name):
-        enforce_subtype(math, AbstractMath)
+        enforce_math_type(math)
         enforce_list_types(lst, math.value_type)
         if len(lst) > 1 and var_name is not None:
             enforce_type(var_name, str)
@@ -179,12 +195,10 @@ class SingleVarPoly:
 
     @staticmethod
     def constant(math, c):
-        enforce_subtype(math, AbstractMath)
         enforce_type(c, math.value_type)
         return SingleVarPoly(math, [c], None)
 
     @staticmethod
     def degree_one_var(math, var_name):
-        enforce_subtype(math, AbstractMath)
         enforce_type(var_name, str)
         return SingleVarPoly(math, [math.zero, math.one], var_name)

@@ -3,7 +3,7 @@ from poly import SingleVarPoly
 from lib.abstract_math import AbstractMath
 
 
-class ElephantMath(AbstractMath):
+class ElephantMath:
     def __init__(self, *, zero, one):
         self.value_type = Elephant
         self.zero = zero
