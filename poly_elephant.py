@@ -1,6 +1,5 @@
 from elephant import Elephant
 from poly import SingleVarPoly
-from lib.abstract_math import AbstractMath
 
 
 class ElephantMath:

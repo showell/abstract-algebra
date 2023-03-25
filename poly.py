@@ -1,9 +1,8 @@
-from lib.abstract_math import AbstractMath
 from lib.type_enforcers import (
     enforce_list_types,
-    enforce_subtype,
     enforce_type,
 )
+
 
 def enforce_math_type(math):
     assert hasattr(math, "add")
@@ -21,6 +20,7 @@ def enforce_math_type(math):
     enforce_type(math.zero, math.value_type)
     enforce_type(math.one, math.value_type)
     enforce_type(math.type_string, str)
+
 
 class SingleVarPoly:
     def __init__(self, math, lst, var_name):

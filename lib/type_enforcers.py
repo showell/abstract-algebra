@@ -8,9 +8,5 @@ def enforce_same_types(x, y):
     assert type(x) == type(y)
 
 
-def enforce_subtype(x, _type):
-    assert isinstance(x, _type)
-
-
 def enforce_type(x, _type):
     assert type(x) == _type
