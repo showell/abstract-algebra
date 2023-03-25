@@ -90,7 +90,9 @@ class SingleVarPoly:
         power = self.math.power
         zero = self.math.zero
         lst = self.lst
-        return polynomial_algorithms.eval(lst, x=x, zero=zero, add=add, mul=mul, power=power)
+        return polynomial_algorithms.eval(
+            lst, x=x, zero=zero, add=add, mul=mul, power=power
+        )
 
     def is_one(self):
         return len(self.lst) == 1 and self.lst[0] == self.math.one
