@@ -13,15 +13,3 @@ BoolMath = MathHelper(
 )
 
 BoolMath.additive_inverse = NOT_DEFINED
-
-
-if __name__ == "__main__":
-    from lib.test_helpers import run_test
-    from commutative_ring import verify_semiring
-
-    F = Bool(False)
-    T = Bool(True)
-
-    @run_test
-    def Bool_is_semi_ring():
-        verify_semiring(BoolMath, [T, F])
