@@ -1,9 +1,5 @@
-from mod5 import Mod5
+from mod5 import Mod5, Mod5Math
 from poly import SingleVarPoly
-from lib.abstract_math import AbstractMath
-
-
-Mod5Math = AbstractMath(value_type=Mod5, zero=Mod5(0), one=Mod5(1))
 
 
 class Mod5Poly:
@@ -23,6 +19,7 @@ class Mod5Poly:
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
+    from math_helper import MathHelper
 
     zero = Mod5Math.zero
     one = Mod5Math.one
@@ -54,4 +51,10 @@ if __name__ == "__main__":
             (p_m * p_two) + p_one,
             (p_m + p_three).raised_to_exponent(15),
         ]
-        verify_ring_properties(poly_samples, zero=p_zero, one=p_one)
+        math = MathHelper(
+            value_type=SingleVarPoly,
+            zero=p_zero,
+            one=p_one,
+        )
+
+        verify_ring_properties(math, poly_samples)

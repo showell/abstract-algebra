@@ -90,6 +90,7 @@ class NumberList:
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, run_test
+    from math_helper import MathHelper
 
     @run_test
     def verify_basics():
@@ -117,9 +118,12 @@ if __name__ == "__main__":
             NumberList([-8, 0, 0, 0, 5]),
             NumberList([103, 8256523499]),
         ]
-        zero = NumberList([])
-        one = NumberList([1])
-        verify_ring_properties(samples, zero=zero, one=one)
+        math = MathHelper(
+            value_type=NumberList,
+            zero=NumberList([]),
+            one=NumberList([1]),
+        )
+        verify_ring_properties(math, samples)
 
     @run_test
     def exponentiation():

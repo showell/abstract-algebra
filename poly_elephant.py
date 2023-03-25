@@ -1,23 +1,5 @@
-from elephant import Elephant
+from elephant import Elephant, ElephantIntegerMath
 from poly import SingleVarPoly
-
-
-class ElephantMath:
-    def __init__(self, *, zero, one):
-        self.value_type = Elephant
-        self.zero = zero
-        self.one = one
-        self.add = Elephant.add
-        self.additive_inverse = Elephant.additive_inverse
-        self.multiply = Elephant.multiply
-        self.power = Elephant.power
-        self.type_string = "Elephant"
-
-
-ElephantIntegerMath = ElephantMath(
-    zero=Elephant.make(0),
-    one=Elephant.make(1),
-)
 
 
 class ElephantIntegerPoly:
@@ -37,6 +19,7 @@ class ElephantIntegerPoly:
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
+    from math_helper import MathHelper
 
     @run_test
     def test_basics():
@@ -67,8 +50,9 @@ if __name__ == "__main__":
             two * three,
         ]
 
-        verify_ring_properties(
-            samples,
+        math = MathHelper(
+            value_type=SingleVarPoly,
             zero=ElephantIntegerPoly.zero,
             one=ElephantIntegerPoly.one,
         )
+        verify_ring_properties(math, samples)

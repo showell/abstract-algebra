@@ -1,8 +1,12 @@
+from math_helper import MathHelper
 from poly import SingleVarPoly
-from lib.abstract_math import AbstractMath
 
 
-IntegerMath = AbstractMath(value_type=int, zero=0, one=1)
+IntegerMath = MathHelper(
+    value_type=int,
+    zero=0,
+    one=1,
+)
 
 
 class IntegerPoly:
@@ -15,6 +19,13 @@ class IntegerPoly:
     @staticmethod
     def from_list(lst):
         return SingleVarPoly(IntegerMath, lst, "x")
+
+
+IntegerPolyMath = MathHelper(
+    value_type=SingleVarPoly,
+    zero=IntegerPoly.zero,
+    one=IntegerPoly.one,
+)
 
 
 if __name__ == "__main__":
@@ -43,7 +54,7 @@ if __name__ == "__main__":
             IP([103, 8256523499]),
         ]
 
-        verify_ring_properties(samples, zero=IntegerPoly.zero, one=IntegerPoly.one)
+        verify_ring_properties(IntegerPolyMath, samples)
 
     zero = IntegerPoly.zero
     one = IntegerPoly.one

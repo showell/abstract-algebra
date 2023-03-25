@@ -1,13 +1,5 @@
-from pair import Pair
+from pair import PairMath
 from poly import SingleVarPoly
-from lib.abstract_math import AbstractMath
-
-
-PairMath = AbstractMath(
-    value_type=Pair,
-    zero=Pair(0, 0),
-    one=Pair(1, 1),
-)
 
 
 class PairPoly:
@@ -18,6 +10,8 @@ class PairPoly:
 
 
 if __name__ == "__main__":
+    from math_helper import MathHelper
+    from pair import Pair
     from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
 
@@ -50,4 +44,9 @@ if __name__ == "__main__":
             (t + c1) ** 3,
         ]
 
-        verify_ring_properties(samples, zero=PairPoly.zero, one=PairPoly.one)
+        math = MathHelper(
+            value_type=SingleVarPoly,
+            zero=PairPoly.zero,
+            one=PairPoly.one,
+        )
+        verify_ring_properties(math, samples)

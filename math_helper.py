@@ -1,7 +1,7 @@
 from lib.type_enforcers import enforce_type
 
 
-class AbstractMath:
+class MathHelper:
     def __init__(self, *, value_type, zero, one):
         self.value_type = value_type
         self.zero = zero

@@ -1,14 +1,5 @@
 from poly import SingleVarPoly
-from poly_integer import IntegerPoly
-from poly_poly import PolyPoly
-from lib.abstract_math import AbstractMath
-
-
-PolyPolyMath = AbstractMath(
-    value_type=SingleVarPoly,
-    zero=PolyPoly.zero,
-    one=PolyPoly.one,
-)
+from poly_poly import PolyPoly, PolyPolyMath
 
 
 class PolyPolyPoly:
@@ -25,6 +16,8 @@ class PolyPolyPoly:
 if __name__ == "__main__":
     from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
+    from poly_integer import IntegerPoly
+    from math_helper import MathHelper
 
     IP = IntegerPoly.from_list
     PP = PolyPoly.from_list
@@ -76,7 +69,6 @@ if __name__ == "__main__":
 
     @run_test
     def verify_ring_axioms():
-        # This takes a while!!!
         samples = [
             PPP([pp_a, pp_d, pp_c]),
             PPP([pp_c, pp_a]),
@@ -84,4 +76,10 @@ if __name__ == "__main__":
             PPP([pp_b]),
         ]
 
-        verify_ring_properties(samples, zero=PolyPolyPoly.zero, one=PolyPolyPoly.one)
+        math = MathHelper(
+            value_type=SingleVarPoly,
+            zero=PolyPolyPoly.zero,
+            one=PolyPolyPoly.one,
+        )
+
+        verify_ring_properties(math, samples)

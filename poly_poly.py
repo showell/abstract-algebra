@@ -1,11 +1,6 @@
 from poly import SingleVarPoly
-from poly_integer import IntegerPoly
-from lib.abstract_math import AbstractMath
-
-
-IntegerPolyMath = AbstractMath(
-    value_type=SingleVarPoly, zero=IntegerPoly.zero, one=IntegerPoly.one
-)
+from poly_integer import IntegerPoly, IntegerPolyMath
+from math_helper import MathHelper
 
 
 class PolyPoly:
@@ -17,6 +12,13 @@ class PolyPoly:
     @staticmethod
     def from_list(lst):
         return SingleVarPoly(IntegerPolyMath, lst, "p")
+
+
+PolyPolyMath = MathHelper(
+    value_type=SingleVarPoly,
+    zero=PolyPoly.zero,
+    one=PolyPoly.one,
+)
 
 
 if __name__ == "__main__":
@@ -64,4 +66,4 @@ if __name__ == "__main__":
             PP([x + one, x + two, p + three]),
         ]
 
-        verify_ring_properties(samples, zero=PolyPoly.zero, one=PolyPoly.one)
+        verify_ring_properties(PolyPolyMath, samples)
