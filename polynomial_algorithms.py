@@ -22,12 +22,20 @@ def eval(lst, *, zero, add, mul, power):
 
 
 def multiply(lst1, lst2, *, add, mul, zero):
+    def sum(x, y):
+        if x == zero:
+            return y
+        elif y == zero:
+            return x
+        else:
+            return add(x, y)
+
     lst = [zero] * (len(lst1) + len(lst2) - 1)
     for i, x in enumerate(lst1):
         for j, y in enumerate(lst2):
             xy = mul(x, y)
             if xy != zero:
-                lst[i + j] = add(lst[i + j], xy)
+                lst[i + j] = sum(lst[i + j], xy)
     return lst
 
 

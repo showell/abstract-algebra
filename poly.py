@@ -106,17 +106,10 @@ class SingleVarPoly:
             return self
 
         zero = self.math.zero
+        add = self.math.add
         mul = self.math.multiply
         lst1 = self.lst
         lst2 = other.lst
-
-        def add(x, y):
-            if x == zero:
-                return y
-            elif y == zero:
-                return x
-            else:
-                return self.math.add(x, y)
 
         lst = polynomial_algorithms.multiply(lst1, lst2, add=add, mul=mul, zero=zero)
         var_name = self.var_name or other.var_name
