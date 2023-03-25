@@ -12,11 +12,11 @@ def add(lst1, lst2, *, add, zero):
     return lst
 
 
-def eval(lst, *, zero, add, mul, power):
+def eval(lst, *, x, zero, add, mul, power):
     result = zero
     for degree, coeff in enumerate(lst):
         if coeff != zero:
-            term = mul(coeff, power(degree))
+            term = mul(coeff, power(x, degree))
             result = add(result, term)
     return result
 

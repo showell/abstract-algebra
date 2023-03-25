@@ -87,10 +87,10 @@ class SingleVarPoly:
     def eval(self, x):
         add = self.math.add
         mul = self.math.multiply
+        power = self.math.power
         zero = self.math.zero
-        power = lambda degree: self.math.power(x, degree)
         lst = self.lst
-        return polynomial_algorithms.eval(lst, zero=zero, add=add, mul=mul, power=power)
+        return polynomial_algorithms.eval(lst, x=x, zero=zero, add=add, mul=mul, power=power)
 
     def is_one(self):
         return len(self.lst) == 1 and self.lst[0] == self.math.one
