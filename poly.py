@@ -2,6 +2,7 @@ from lib.type_enforcers import (
     enforce_list_types,
     enforce_type,
 )
+import polynomial_algorithms
 
 
 def enforce_math_type(math):
@@ -71,16 +72,8 @@ class SingleVarPoly:
         lst2 = other.lst
         add = self.math.add
 
-        if len(lst1) < len(lst2):
-            (lst2, lst1) = (lst1, lst2)
+        lst = polynomial_algorithms.add(lst1, lst2, add=add, zero=zero)
 
-        lst = lst1[:]
-        for i, x in enumerate(lst2):
-            if x != zero:
-                if lst[i] == zero:
-                    lst[i] = x
-                else:
-                    lst[i] = add(lst[i], x)
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
 
@@ -96,13 +89,8 @@ class SingleVarPoly:
         mul = self.math.multiply
         zero = self.math.zero
         power = lambda degree: self.math.power(x, degree)
-
-        result = self.math.zero
-        for degree, coeff in enumerate(self.lst):
-            if coeff != zero:
-                term = mul(coeff, power(degree))
-                result = add(result, term)
-        return result
+        lst = self.lst
+        return polynomial_algorithms.eval(lst, zero=zero, add=add, mul=mul, power=power)
 
     def is_one(self):
         return len(self.lst) == 1 and self.lst[0] == self.math.one
@@ -121,7 +109,6 @@ class SingleVarPoly:
         mul = self.math.multiply
         lst1 = self.lst
         lst2 = other.lst
-        lst = [zero] * (len(lst1) + len(lst2) - 1)
 
         def add(x, y):
             if x == zero:
@@ -131,12 +118,7 @@ class SingleVarPoly:
             else:
                 return self.math.add(x, y)
 
-        for i, x in enumerate(lst1):
-            for j, y in enumerate(lst2):
-                xy = mul(x, y)
-                if xy != zero:
-                    lst[i + j] = add(lst[i + j], xy)
-
+        lst = polynomial_algorithms.multiply(lst1, lst2, add=add, mul=mul, zero=zero)
         var_name = self.var_name or other.var_name
         return SingleVarPoly(self.math, lst, var_name)
 
@@ -150,30 +132,10 @@ class SingleVarPoly:
         var_name = self.var_name
         zero = self.math.zero
         one = self.math.one
-
-        if len(self.lst) == 0:
-            return str(zero)
-
-        def monomial(coeff, i):
-            if i == 0:
-                return str(coeff)
-            elif i == 1:
-                if coeff == one:
-                    return var_name
-                else:
-                    return f"({coeff})*{var_name}"
-            else:
-                if coeff == one:
-                    return f"{var_name}**{i}"
-                else:
-                    return f"({coeff})*{var_name}**{i}"
-
-        terms = [
-            monomial(coeff, degree)
-            for degree, coeff in enumerate(self.lst)
-            if coeff != zero
-        ]
-        return "+".join(reversed(terms))
+        lst = self.lst
+        return polynomial_algorithms.stringify(
+            lst, var_name=var_name, zero=zero, one=one
+        )
 
     def raised_to_exponent(self, exponent):
         enforce_type(exponent, int)
