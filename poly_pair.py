@@ -1,4 +1,4 @@
-from pair import PairMath
+from math_pair import PairMath
 from poly import SingleVarPoly
 
 

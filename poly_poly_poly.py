@@ -1,5 +1,6 @@
 from poly import SingleVarPoly
-from poly_poly import PolyPoly, PolyPolyMath
+from poly_poly import PolyPoly
+from math_poly_poly import PolyPolyMath
 
 
 class PolyPolyPoly:

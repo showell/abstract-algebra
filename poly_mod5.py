@@ -1,4 +1,5 @@
-from mod5 import Mod5, Mod5Math
+from mod5 import Mod5
+from math_mod5 import Mod5Math
 from poly import SingleVarPoly
 
 

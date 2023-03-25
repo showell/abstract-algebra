@@ -1,6 +1,6 @@
 from poly import SingleVarPoly
-from poly_integer import IntegerPoly, IntegerPolyMath
-from math_helper import MathHelper
+from poly_integer import IntegerPoly
+from math_poly_integer import IntegerPolyMath
 
 
 class PolyPoly:
@@ -14,15 +14,7 @@ class PolyPoly:
         return SingleVarPoly(IntegerPolyMath, lst, "p")
 
 
-PolyPolyMath = MathHelper(
-    value_type=SingleVarPoly,
-    zero=PolyPoly.zero,
-    one=PolyPoly.one,
-)
-
-
 if __name__ == "__main__":
-    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
 
     PP = PolyPoly.from_list
@@ -54,16 +46,3 @@ if __name__ == "__main__":
         p = pp.eval(x + one)
         assert_str(p, "x**2+(2)*x+1")
         assert p.eval(100) == 10201
-
-    @run_test
-    def check_PolyPoly_is_ring():
-        p = (x + one) * (x + three) * (x + one) + two
-        q = p.raised_to_exponent(3)
-
-        samples = [
-            PP([one, two, three]),
-            PP([p, q, x, p, q, x]),
-            PP([x + one, x + two, p + three]),
-        ]
-
-        verify_ring_properties(PolyPolyMath, samples)

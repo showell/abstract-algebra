@@ -1,4 +1,5 @@
-from elephant import Elephant, ElephantIntegerMath
+from elephant import Elephant
+from math_elephant import ElephantIntegerMath
 from poly import SingleVarPoly
 
 

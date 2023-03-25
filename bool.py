@@ -7,8 +7,6 @@ performs simple boolean logic without NOT (i.e. negation) forms
 only a semiring. (Note that rings require an additive inverse.)
 """
 
-from math_helper import MathHelper
-
 
 class Bool:
     def __init__(self, b):
@@ -33,22 +31,8 @@ class Bool:
         return str(self.b)
 
 
-def NOT_DEFINED():
-    raise AssertionError("We don't allow boolean negation")
-
-
-BoolMath = MathHelper(
-    value_type=Bool,
-    zero=Bool(False),
-    one=Bool(True),
-)
-
-BoolMath.additive_inverse = NOT_DEFINED
-
-
 if __name__ == "__main__":
     from lib.test_helpers import run_test
-    from commutative_ring import verify_semiring
 
     F = Bool(False)
     T = Bool(True)
@@ -68,10 +52,6 @@ if __name__ == "__main__":
         assert T == T
         assert F == F
         assert F != T
-
-    @run_test
-    def Bool_is_semi_ring():
-        verify_semiring(BoolMath, [T, F])
 
     @run_test
     def exponentiation():

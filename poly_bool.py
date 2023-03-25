@@ -1,4 +1,5 @@
-from bool import Bool, BoolMath
+from bool import Bool
+from math_bool import BoolMath
 from poly import SingleVarPoly
 
 

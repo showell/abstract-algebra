@@ -21,15 +21,7 @@ class IntegerPoly:
         return SingleVarPoly(IntegerMath, lst, "x")
 
 
-IntegerPolyMath = MathHelper(
-    value_type=SingleVarPoly,
-    zero=IntegerPoly.zero,
-    one=IntegerPoly.one,
-)
-
-
 if __name__ == "__main__":
-    from commutative_ring import verify_ring_properties
     from lib.test_helpers import assert_equal, assert_str, run_test
 
     IP = IntegerPoly.from_list
@@ -44,17 +36,6 @@ if __name__ == "__main__":
 
         assert IP([7, 8]) * IP([1, 6]) == IP([7, 50, 48])
         assert 87 * 61 == 48 * 100 + 50 * 10 + 7
-
-    @run_test
-    def check_IntegerPoly_is_ring():
-        samples = [
-            IP([]),
-            IP([42, 39, 2]),
-            IP([-8, 0, 0, 0, 5]),
-            IP([103, 8256523499]),
-        ]
-
-        verify_ring_properties(IntegerPolyMath, samples)
 
     zero = IntegerPoly.zero
     one = IntegerPoly.one
